@@ -6,5 +6,5 @@
 CND_BASEDIR=`pwd`
 # default configuration
 CND_ARTIFACT_DIR_default=dist/default/production
-CND_ARTIFACT_NAME_default=ERG.X.production.hex
-CND_ARTIFACT_PATH_default=dist/default/production/ERG.X.production.hex
+CND_ARTIFACT_NAME_default=embeded_PIC24F.production.hex
+CND_ARTIFACT_PATH_default=dist/default/production/embeded_PIC24F.production.hex

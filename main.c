@@ -5,26 +5,31 @@
  * Created on November 1, 2019, 6:54 PM
  */
 
-#include "xc.h"
+// #include "xc.h"
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "bsp/buttons.h"
-#include "bsp/leds.h"
-#include "bsp/timer_1ms.h"
-#include "bsp/uart2.h"
-#include <libpic30.h>
+// #include "bsp/buttons.h"
+// #include "bsp/leds.h"
+// #include "bsp/timer_1ms.h"
+//#include "bsp/uart2.h"
+// #include "mcc_generated_files/adc1.h"
+// #include "mcc_generated_files/system.h"
+// #include "mcc_generated_files/charlcd1.h"
+// #include <libpic30.h>
+
+#include "src/led.h"
+#include "src/button.h"
+#include "src/timer.h"
 
 #define MAX_SECONDS 600 /* 10 minutes */
 #define BUTTON_EVENT_TIME 10 /* ms */
 
+#define forever for(; ;)
 
-static uint16_t BUTTON_DEBOUNCE[5] = {0};
-static uint16_t BUTTON_DEBOUNCE_TIME = BUTTON_EVENT_TIME * 2; /* multiples of 10 ms */
-
-static uint16_t TIMER_TIME = 100;
+static const uint16_t TIMER_TIME = 100;
 
 static uint16_t SECONDS_REMAINING = 0;
 
@@ -42,7 +47,6 @@ static const char * const STATE_STRING[] = {
 	[ALARM] = "Alarm"
 };
 
-
 static uint16_t SNOOZE_COUNT = 0;
 
 
@@ -53,25 +57,25 @@ static void stop_alarm(void);
 
 
 int main(void) {
-    initU2(); /* for debugging */
+    // initU2(); /* for debugging */
+    // initialize the device
+    // SYSTEM_Initialize();
+    // CHARLCD1_Initialize();
+    init_button(BUTTON_EVENT_TIME);
 
-    /* Get a timer event once every 100ms for the blink alive. */
+
     TIMER_SetConfiguration(TIMER_CONFIGURATION_1MS);
     TIMER_RequestTick(&timer_check, TIMER_TIME);
     TIMER_RequestTick(&button_event, BUTTON_EVENT_TIME);
 
-    BUTTON_Enable(BUTTON_S3);
-    BUTTON_Enable(BUTTON_S4);
-    BUTTON_Enable(BUTTON_S5);
-    
-    while (1) {
+    forever {
     }
 }
 
 static void timer_check(void) {
     LED_Toggle(LED_D3);
-    printf("Remaining: %d seconds"
-           "\nState: %s\n",
+    printf("Remaining: %d seconds\n"
+           "State: %s\n",
             SECONDS_REMAINING,
             STATE_STRING[STATE]);
     
@@ -115,38 +119,22 @@ static void stop_alarm(void) {
     /* disable some pin */
 }
 
-/* check if button is pressed and not debounced */
-static bool check_button_pressed(BUTTON btn) {
-    if (BUTTON_IsPressed(btn) && BUTTON_DEBOUNCE[btn] == 0) {
-        BUTTON_DEBOUNCE[btn] = BUTTON_DEBOUNCE_TIME;
-        return true;
-
-    }
-    
-    /* always subtract from debounce */
-    if (BUTTON_DEBOUNCE[btn] > 0) {
-        BUTTON_DEBOUNCE[btn] -= 1;
-    }
-    
-    return false;
-}
-
 static void button_event(void) {
-    if (check_button_pressed(BUTTON_S3)) {
+    if (debounce_button_pressed(BUTTON_S3)) {
         /* do UP action*/
         if (SECONDS_REMAINING < MAX_SECONDS)
             SECONDS_REMAINING += 10;
         printf("S3, %d\n", SECONDS_REMAINING);
     }
 
-    if (check_button_pressed(BUTTON_S4)) {
+    if (debounce_button_pressed(BUTTON_S4)) {
         /* do DOWN action*/
         if (SECONDS_REMAINING > 0)
             SECONDS_REMAINING -= 10;
         printf("S4, %d\n", SECONDS_REMAINING);
     }
 
-    if (check_button_pressed(BUTTON_S5)) {
+    if (debounce_button_pressed(BUTTON_S5)) {
         /* do ENTER/SNOOZE action*/
         switch (STATE) {
             case SELECT_TIME: {
@@ -165,4 +153,27 @@ static void button_event(void) {
   
         printf("S5, %d\n", SECONDS_REMAINING);
     }
+}
+
+/* 
+ * TC1047/TC1047A temperature sensor 
+ *
+ * See: https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/21498D.pdf
+ *
+ */
+static float mV_to_C(float mV) {
+    /*
+     * atd / 1024 = mV / (Vref+ - Vref-)
+     * mV = (atd / 1024) * (Vref+ - Vref-)
+     * mV = (atd / 1024) * 1.5 ? (1)
+     *
+     * Vout(mV) = 10mV * temp(C) + 500
+     * temp(C) = (Vout(mV) - 500) / 10 (2)
+     *
+     * from (1), (2)
+     *
+     * temp(C) = {[(atd/1024) * 1.5] - 500} / 100
+     *
+     */
+    return (mV - 500) / 10;
 }

@@ -1,0 +1,6 @@
+# CompileFlags:
+#   Add: [
+#     # -I"/mnt/c/Program Files/Microchip/xc16/v2.00/support/PIC24F/h/"
+#     # -isystem"/opt/microchip/xc16/v2.00/support/PIC24F/h/"
+#     ]
+#   Compiler: /opt/microchip/xc16/v2.00/bin/xc16-gcc
