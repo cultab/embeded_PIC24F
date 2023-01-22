@@ -11,27 +11,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// #include "bsp/buttons.h"
-// #include "bsp/leds.h"
-// #include "bsp/timer_1ms.h"
-//#include "bsp/uart2.h"
-// #include "mcc_generated_files/adc1.h"
-// #include "mcc_generated_files/system.h"
-// #include "mcc_generated_files/charlcd1.h"
 // #include <libpic30.h>
 
 #include "src/led.h"
 #include "src/button.h"
 #include "src/timer.h"
+#include "src/adc.h"
 
 #define MAX_SECONDS 600 /* 10 minutes */
-#define BUTTON_EVENT_TIME 10 /* ms */
+
+#define BUTTON_EVENT_TIME   25 /* ms */
+#define LCD_UPDATE_TIME    100 /* ms */
+#define TIMER_TIME        1000 /* ms */
 
 #define forever for(; ;)
 
-static const uint16_t TIMER_TIME = 100;
 
 static uint16_t SECONDS_REMAINING = 0;
+static float TEMPERATURE = 0.0f;
 
 static enum State {
     SELECT_TIME,
@@ -49,35 +46,36 @@ static const char * const STATE_STRING[] = {
 
 static uint16_t SNOOZE_COUNT = 0;
 
-
 static void timer_check(void);
 static void button_event(void);
 static void start_alarm(void);
 static void stop_alarm(void);
+static void update_lcd(void);
+static void update_temperature(void);
+static float adc_to_celcius(int mV);
 
 
 int main(void) {
-    // initU2(); /* for debugging */
     // initialize the device
-    // SYSTEM_Initialize();
-    // CHARLCD1_Initialize();
+    // initU2(); /* for debugging */
     init_button(BUTTON_EVENT_TIME);
 
+    // init ADC
+    ADC_SetConfiguration(ADC_CONFIGURATION_DEFAULT);
+    ADC_ChannelEnable(ADC_CHANNEL_TEMPERATURE_SENSOR);
 
+    // setup timers
     TIMER_SetConfiguration(TIMER_CONFIGURATION_1MS);
     TIMER_RequestTick(&timer_check, TIMER_TIME);
     TIMER_RequestTick(&button_event, BUTTON_EVENT_TIME);
+    TIMER_RequestTick(&update_lcd, LCD_UPDATE_TIME);
 
-    forever {
-    }
+    forever { /* do nothing */  }
 }
 
 static void timer_check(void) {
     LED_Toggle(LED_D3);
-    printf("Remaining: %d seconds\n"
-           "State: %s\n",
-            SECONDS_REMAINING,
-            STATE_STRING[STATE]);
+    // printf("Remaining: %d seconds\n" "State: %s\n", SECONDS_REMAINING, STATE_STRING[STATE]); /* for debugging */
     
     switch(STATE) {
     case COUNTING_DOWN: {
@@ -117,6 +115,15 @@ static void start_alarm(void) {
 
 static void stop_alarm(void) {
     /* disable some pin */
+}
+
+static void update_lcd(void) {
+    uint16_t value = ADC_Read12bit(ADC_CHANNEL_TEMPERATURE_SENSOR);
+    float temp = adc_to_celcius(value);
+
+    printf("\f"); // clear screen
+    printf("171014, %5.2f%cC\n", temp, 0xb0); // print AM and temperature
+    printf("Remaining time[%s%c]: %d\n", STATE_STRING[STATE], SNOOZE_COUNT == 0 ? SNOOZE_COUNT + '0' : ' ', SECONDS_REMAINING); // print state and remaining time
 }
 
 static void button_event(void) {
@@ -161,19 +168,22 @@ static void button_event(void) {
  * See: https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/21498D.pdf
  *
  */
-static float mV_to_C(float mV) {
+static float adc_to_celcius(int value) {
     /*
-     * atd / 1024 = mV / (Vref+ - Vref-)
-     * mV = (atd / 1024) * (Vref+ - Vref-)
-     * mV = (atd / 1024) * 1.5 ? (1)
+     * adc / 4096 = mV / (Vref+ - Vref-)
+     * mV = (adc / 4096) * (Vref+ - Vref-) (1)
      *
      * Vout(mV) = 10mV * temp(C) + 500
      * temp(C) = (Vout(mV) - 500) / 10 (2)
      *
      * from (1), (2)
      *
-     * temp(C) = {[(atd/1024) * 1.5] - 500} / 100
+     * temp(C) = {[(adc/4096) * (Vref+ - Vref-)] - 500} / 10
      *
      */
-    return (mV - 500) / 10;
+    const float Vrefp = 5.0f;
+    const float Vrefn = 0.0f;
+    const float adc_stages = 4096.f;
+    return (((value/adc_stages) * (Vrefp - Vrefn)) - 500) / 10
+    // return (mV - 500) / 10.f;
 }

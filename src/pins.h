@@ -48,6 +48,29 @@ struct {
 struct {
     int ANSA7;
 } ANSAbits;
+struct {
+    int ADON;
+    int SSRC;
+    int FORM;
+    int MODE12;
+    int SAMP;
+    int DONE;
+} AD1CON1bits;
+struct {
+    int SMPI;
+    int PVCFG;
+} AD1CON2bits;
+struct {
+    int SAMC;
+    int ADCS;
+} AD1CON3bits;
+int AD1CHS;
+int ADC1BUF0;
+struct {
+    int ANSB5;
+    int ANSB4;
+} ANSBbits;
+
 
 #endif/*}}}*/
 

@@ -1,5 +1,5 @@
 
-#include <xc.h>
+// #include <xc.h>
 
 #include <stdint.h>
 #include <stdbool.h>
@@ -51,7 +51,7 @@ uint8_t ADC_ReadPercentage( ADC_CHANNEL channel )
 }
 
 /*********************************************************************
-* Function: ADC_Read10bit(ADC_CHANNEL channel);
+* Function: ADC_Read12bit(ADC_CHANNEL channel);
 *
 * Overview: Reads the requested ADC channel and returns the 10-bit
 *           representation of this data.
@@ -68,7 +68,7 @@ uint8_t ADC_ReadPercentage( ADC_CHANNEL channel )
 *         channel conversion or 0xFFFF for an error.
 *
 ********************************************************************/
-uint16_t ADC_Read10bit(ADC_CHANNEL channel)
+uint16_t ADC_Read12bit(ADC_CHANNEL channel)
 {
     uint16_t i;
     
@@ -84,24 +84,24 @@ uint16_t ADC_Read10bit(ADC_CHANNEL channel)
             return 0xFFFF;
     }
 
-    AD1CHS = channel ;
+    ADC_CHANNEL_REG = channel ;
 
     // Get an ADC sample
-    AD1CON1bits.SAMP = 1;           //Start sampling
+    ADC_SAMPLE_ENABLE_BIT = 1; // start sampling
     for(i=0;i<1000;i++)
     {
         Nop(); //Sample delay, conversion start automatically
     } 
 
-    AD1CON1bits.SAMP = 0;           //Start sampling
+    ADC_SAMPLE_ENABLE_BIT = 0;           //stop sampling
     for(i=0;i<1000;i++)
     {
         Nop(); //Sample delay, conversion start automatically
     }
 
-    while(!AD1CON1bits.DONE);       //Wait for conversion to complete
+    while(!ADC_CONVERSION_STATUS_BIT);       //Wait for conversion to complete
 
-    return ADC1BUF0;
+    return ADC_RESULT_BUFFER;
 }
 
 /*********************************************************************
@@ -122,10 +122,10 @@ bool ADC_ChannelEnable(ADC_CHANNEL channel)
     switch(channel)
     {
         case ADC_CHANNEL_5:
-            ANSBbits.ANSB5 = PIN_ANALOG ;
+            ANSBbits.ANSB5 = ANALOG ;
 
         case ADC_CHANNEL_4:
-            ANSBbits.ANSB4 = PIN_ANALOG ;
+            ANSBbits.ANSB4 = ANALOG ;
             return true ;
 
         default:
@@ -151,13 +151,15 @@ bool ADC_SetConfiguration(ADC_CONFIGURATION configuration)
 {
     if(configuration == ADC_CONFIGURATION_DEFAULT)
     {
-        AD1CON2bits.PVCFG = 0x0 ;
-        AD1CON3bits.ADCS = 0xFF ;
-        AD1CON1bits.SSRC = 0x0;
-        AD1CON3bits.SAMC = 0b10000;
-        AD1CON1bits.FORM = 0b00;
-        AD1CON2bits.SMPI = 0x0;
-        AD1CON1bits.ADON = 1;
+        ADC_POSITIVE_VREF_SOURCE = ADC_POSITIVE_VREF_SOURCE_AVDD;
+        ADC_CONV_CLOCK = ADC_CONV_CLOCK_VALUE; // see header file
+        ADC_SAMPLE_CLOCK_SOURCE_BITS = ADC_SAMPLE_CLOCK_SOURCE_MANUAL_SOFTWARE_CLEAR;
+        ADC_AUTO_SAMPLE = ADC_AUTO_SAMPLE_16_ADC_CYCLES;
+        ADC_FORMAT = ADC_FORMAT_ABSOLUTE_DECIMAL_UNSIGNED_RIGHT;
+        ADC_INTERUPT_SAMPLE = ADC_INTERUPT_SAMPLE_FOR_EVERY_SAMPLE;
+        ADC_ON = 1;
+        ADC_OPERATION_MODE = ADC_OPERATION_MODE_12BIT;
+
         return true;
     }
 		
