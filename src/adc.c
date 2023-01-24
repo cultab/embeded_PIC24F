@@ -1,5 +1,5 @@
 
-// #include <xc.h>
+#include <xc.h>
 
 #include <stdint.h>
 #include <stdbool.h>
@@ -41,7 +41,7 @@ uint8_t ADC_ReadPercentage( ADC_CHANNEL channel )
     }
     
     //A very crude percentage calculation
-    percent = (ADC_Read10bit(channel) / 10);
+    percent = (ADC_Read12bit(channel) / 10);
 
     if(percent > 100)
     {

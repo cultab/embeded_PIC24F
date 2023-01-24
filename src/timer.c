@@ -1,4 +1,5 @@
 
+#include <xc.h>
 #include <stdbool.h>
 #include <stdint.h>
 #include <stddef.h>
@@ -11,9 +12,28 @@
 #pragma message "This module requires a definition for the peripheral clock frequency.  Assuming 16MHz Fcy (32MHz Fosc).  Define value if this is not correct."
 #endif
 
-#define CLOCK_DIVIDER TIMER_PRESCALER_1
-#define PR3_SETTING (SYSTEM_PERIPHERAL_CLOCK/1000/1)
 
+/* Definitions *****************************************************/
+#define STOP_TIMER_IN_IDLE_MODE     0x2000
+#define TIMER_SOURCE_INTERNAL       0x0000
+#define TIMER_SOURCE_EXTERNAL       0x0002
+#define TIMER_ON                    0x8000
+#define GATED_TIME_DISABLED         0x0000
+
+#define TIMER_16BIT_MODE            0x0000
+#define TIMER_32BIT_MODE            0x0004
+
+#define TIMER_PRESCALER_1           0x0000
+#define TIMER_PRESCALER_8           0x0010
+#define TIMER_PRESCALER_64          0x0020
+#define TIMER_PRESCALER_256         0x0030
+#define TIMER_INTERRUPT_PRIORITY    0x0001
+#define TIMER_INTERRUPT_PRIORITY_4  0x0004
+
+#define CLOCK_DIVIDER TIMER_PRESCALER_1
+#define PR3_SETTING (SYSTEM_PERIPHERAL_CLOCK/TIMER_TICK_INTERVAL_MICRO_SECONDS/1)
+
+#if 0
 #if (PR3_SETTING > 0xFFFF)
 #undef CLOCK_DIVIDER
 #undef PR3_SETTING
@@ -34,26 +54,13 @@
 #define CLOCK_DIVIDER TIMER_PRESCALER_256
 #define PR3_SETTING (SYSTEM_PERIPHERAL_CLOCK/1000/256)
 #endif
+#endif
 
 /* Compiler checks and configuration *******************************/
 #ifndef TIMER_MAX_1MS_CLIENTS
     #define TIMER_MAX_1MS_CLIENTS 10
 #endif
 
-/* Definitions *****************************************************/
-#define STOP_TIMER_IN_IDLE_MODE     0x2000
-#define TIMER_SOURCE_INTERNAL       0x0000
-#define TIMER_SOURCE_EXTERNAL       0x0002
-#define TIMER_ON                    0x8000
-#define GATED_TIME_DISABLED         0x0000
-#define TIMER_16BIT_MODE            0x0000
-
-#define TIMER_PRESCALER_1           0x0000
-#define TIMER_PRESCALER_8           0x0010
-#define TIMER_PRESCALER_64          0x0020
-#define TIMER_PRESCALER_256         0x0030
-#define TIMER_INTERRUPT_PRIORITY    0x0001
-#define TIMER_INTERRUPT_PRIORITY_4  0x0004
 
 /* Type Definitions ************************************************/
 typedef struct

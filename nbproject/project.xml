@@ -14,11 +14,15 @@
             <sourceEncoding>ISO-8859-1</sourceEncoding>
             <make-dep-projects/>
             <sourceRootList>
-                <sourceRootElem>bsp</sourceRootElem>
+                <sourceRootElem/>
             </sourceRootList>
             <confList>
                 <confElem>
-                    <name>default</name>
+                    <name>uart2</name>
+                    <type>2</type>
+                </confElem>
+                <confElem>
+                    <name>LCD</name>
                     <type>2</type>
                 </confElem>
             </confList>
@@ -26,5 +30,14 @@
                 <project-formatting-style>false</project-formatting-style>
             </formatting>
         </data>
+        <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
+            <word>Cntdwn</word>
+            <word>debounce</word>
+            <word>debounced</word>
+            <word>ds</word>
+            <word>init</word>
+            <word>printf</word>
+            <word>Snoozed</word>
+        </spellchecker-wordlist>
     </configuration>
 </project>

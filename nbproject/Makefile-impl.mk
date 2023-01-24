@@ -24,14 +24,14 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=embeded_PIC24F
+PROJECTNAME=embeded_PIC24F-master
 
 # Active Configuration
-DEFAULTCONF=default
+DEFAULTCONF=LCD
 CONF=${DEFAULTCONF}
 
 # All Configurations
-ALLCONFS=default 
+ALLCONFS=uart2 LCD 
 
 
 # build
@@ -45,13 +45,15 @@ ALLCONFS=default
 
 # clobber
 .clobber-impl: .clobber-pre .depcheck-impl
-	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=default clean
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=uart2 clean
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=LCD clean
 
 
 
 # all
 .all-impl: .all-pre .depcheck-impl
-	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=default build
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=uart2 build
+	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=LCD build
 
 
 

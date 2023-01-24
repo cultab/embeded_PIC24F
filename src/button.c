@@ -1,7 +1,8 @@
 
-// #include <xc.h>
+#include <xc.h>
 #include <stdbool.h>
 #include <stdint.h>
+#include <stdio.h>
 
 #include "button.h"
 #include "pins.h"
@@ -15,20 +16,31 @@ void init_button(uint16_t timer_ms) {
     BUTTON_Enable(BUTTON_S4);
     BUTTON_Enable(BUTTON_S5);
 
-    DEBOUNCE_TIME = timer_ms * 2;
+    DEBOUNCE_TIME = timer_ms * 1;
 }
     
-/* check if button is pressed and not debounced */
+/*
+ * Check if button is pressed and not debounced 
+ * 
+ * Input: enum BUTTON btn
+ * 
+ * Output: bool
+ *  - true if the button was pressed
+ *    but has not been already pressed
+ *    DEBOUNCE_TIME * timer_rate milliseconds ago
+ *  - false otherwise
+ * 
+ */
 bool debounce_button_pressed(BUTTON btn) {
     if (BUTTON_IsPressed(btn) && BUTTON_DEBOUNCE[btn] == 0) {
         BUTTON_DEBOUNCE[btn] = DEBOUNCE_TIME;
+        //printf("PRESSED %s\n", BUTTON_STRING[btn]); /* for debugging */
         return true;
+    } 
 
-    }
-    
     /* always subtract from debounce */
     if (BUTTON_DEBOUNCE[btn] > 0) {
-        BUTTON_DEBOUNCE[btn] -= 1;
+        BUTTON_DEBOUNCE[btn] -= 1;   
     }
     
     return false;

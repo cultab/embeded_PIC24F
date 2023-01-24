@@ -74,9 +74,13 @@ struct {
 
 #endif/*}}}*/
 
+
+
+// input and output pins configuration value
 #define PIN_INPUT   1
 #define PIN_OUTPUT  0
 
+// analog and digital pins configuration value
 #define ANALOG      1
 #define DIGITAL     0
 
@@ -102,10 +106,10 @@ struct {
 
 // Buttons
 //      S1  is MCLR button
-#define S3_PORT  PORTDbits.RD6
-#define S6_PORT  PORTDbits.RD7
-#define S5_PORT  PORTAbits.RA7       //Overlaps with D10
-#define S4_PORT  PORTDbits.RD13
+#define S3_PORT  PORTDbits.RD6       // pullup
+#define S6_PORT  PORTDbits.RD7       // no pullup, noisy
+#define S5_PORT  PORTAbits.RA7       // no pullup, settels to up after one press, Overlaps with D10, 
+#define S4_PORT  PORTDbits.RD13      // pullup
 
 #define S3_TRIS  TRISDbits.TRISD6
 #define S6_TRIS  TRISDbits.TRISD7

@@ -15,6 +15,13 @@ typedef enum {
         // S1 is MCLR
 } BUTTON;
 
+static const char * const BUTTON_STRING[] = {
+	[BUTTON_NONE] = "none",
+	[BUTTON_S3] = "s3",
+	[BUTTON_S4] = "s4",
+	[BUTTON_S5] = "s5"
+};
+
 void BUTTON_Enable(BUTTON button);
 void init_button(uint16_t timer_ms);
 bool debounce_button_pressed(BUTTON btn);

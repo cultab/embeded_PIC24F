@@ -7,7 +7,8 @@
 #include <stdint.h>
 #include <stddef.h>
 
-#define TIMER_TICK_INTERVAL_MICRO_SECONDS 1000
+// was 1000 but timers were x10 faster than expected
+#define TIMER_TICK_INTERVAL_MICRO_SECONDS 10000
 
 /* 
  * Timer

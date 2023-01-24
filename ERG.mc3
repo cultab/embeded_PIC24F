@@ -91,9 +91,9 @@
       </entry>
    </usedClasses>
    <usedLibraries class="java.util.ArrayList">
-      <ILibraryFile class="com.microchip.mcc.core.library.BaseLibraryFile" libraryClass="com.microchip.mcc.boardsupportlibrary.BoardSuppportLibrary" version="1.12.0"/>
-      <ILibraryFile class="com.microchip.mcc.core.library.BaseLibraryFile" libraryClass="com.microchip.mcc.mcu16.Mcu16PeripheralLibrary" version="1.171.1"/>
       <ILibraryFile class="com.microchip.mcc.core.library.BaseLibraryFile" libraryClass="com.microchip.mcc.foundationservices.library.FoundationServicesLibrary" version="0.2.3"/>
+      <ILibraryFile class="com.microchip.mcc.core.library.BaseLibraryFile" libraryClass="com.microchip.mcc.mcu16.Mcu16PeripheralLibrary" version="1.171.1"/>
+      <ILibraryFile class="com.microchip.mcc.core.library.BaseLibraryFile" libraryClass="com.microchip.mcc.boardsupportlibrary.BoardSuppportLibrary" version="1.12.0"/>
    </usedLibraries>
    <tokenMap class="java.util.TreeMap">
       <entry>
@@ -4150,11 +4150,11 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="Custom Name RA0"/>
-         <value>CharLCD1_DB4</value>
+         <value/>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="Custom Name RA1"/>
-         <value>CharLCD1_DB5</value>
+         <value/>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="Custom Name RA10"/>
@@ -4170,23 +4170,23 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="Custom Name RA2"/>
-         <value>CharLCD1_DB6</value>
+         <value/>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="Custom Name RA3"/>
-         <value>CharLCD1_DB7</value>
+         <value/>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="Custom Name RA4"/>
-         <value>CharLCD1_E</value>
+         <value/>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="Custom Name RA5"/>
-         <value>CharLCD1_RS</value>
+         <value/>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="Custom Name RA6"/>
-         <value>CharLCD1_RW</value>
+         <value/>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="Custom Name RA7"/>
@@ -4198,11 +4198,11 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="Custom Name RB0"/>
-         <value>Switch1</value>
+         <value/>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="Custom Name RB1"/>
-         <value>Switch2</value>
+         <value/>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="Custom Name RB10"/>
@@ -4230,19 +4230,19 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="Custom Name RB2"/>
-         <value>Switch3</value>
+         <value/>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="Custom Name RB3"/>
-         <value>OnOff_LED1</value>
+         <value/>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="Custom Name RB4"/>
-         <value>OnOff_LED2</value>
+         <value/>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="Custom Name RB5"/>
-         <value>OnOff_LED3</value>
+         <value/>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="Pin Module" name="Custom Name RB6"/>
@@ -12126,11 +12126,11 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="Pin Module" registerAlias="ANSA"/>
-         <value>1664</value>
+         <value>1728</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="Pin Module" registerAlias="ANSB"/>
-         <value>15360</value>
+         <value>15423</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="Pin Module" registerAlias="ANSC"/>
@@ -12494,11 +12494,11 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="Pin Module" registerAlias="TRISA"/>
-         <value>50816</value>
+         <value>50943</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="Pin Module" registerAlias="TRISB"/>
-         <value>16327</value>
+         <value>16383</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.RegisterKey" moduleName="Pin Module" registerAlias="TRISC"/>
@@ -12526,7 +12526,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="ANSA" settingAlias="ANSELA6"/>
-         <value>digital</value>
+         <value>analog</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="ANSA" settingAlias="ANSELA7"/>
@@ -12538,11 +12538,11 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="ANSB" settingAlias="ANSELB0"/>
-         <value>digital</value>
+         <value>analog</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="ANSB" settingAlias="ANSELB1"/>
-         <value>digital</value>
+         <value>analog</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="ANSB" settingAlias="ANSELB10"/>
@@ -12570,19 +12570,19 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="ANSB" settingAlias="ANSELB2"/>
-         <value>digital</value>
+         <value>analog</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="ANSB" settingAlias="ANSELB3"/>
-         <value>digital</value>
+         <value>analog</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="ANSB" settingAlias="ANSELB4"/>
-         <value>digital</value>
+         <value>analog</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="ANSB" settingAlias="ANSELB5"/>
-         <value>digital</value>
+         <value>analog</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="ANSB" settingAlias="ANSELB6"/>
@@ -15282,11 +15282,11 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="TRISA" settingAlias="TRISA0"/>
-         <value>output</value>
+         <value>input</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="TRISA" settingAlias="TRISA1"/>
-         <value>output</value>
+         <value>input</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="TRISA" settingAlias="TRISA10"/>
@@ -15302,23 +15302,23 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="TRISA" settingAlias="TRISA2"/>
-         <value>output</value>
+         <value>input</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="TRISA" settingAlias="TRISA3"/>
-         <value>output</value>
+         <value>input</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="TRISA" settingAlias="TRISA4"/>
-         <value>output</value>
+         <value>input</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="TRISA" settingAlias="TRISA5"/>
-         <value>output</value>
+         <value>input</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="TRISA" settingAlias="TRISA6"/>
-         <value>output</value>
+         <value>input</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="TRISA" settingAlias="TRISA7"/>
@@ -15366,15 +15366,15 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="TRISB" settingAlias="TRISB3"/>
-         <value>output</value>
+         <value>input</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="TRISB" settingAlias="TRISB4"/>
-         <value>output</value>
+         <value>input</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="TRISB" settingAlias="TRISB5"/>
-         <value>output</value>
+         <value>input</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.SettingKey" moduleName="Pin Module" registerAlias="TRISB" settingAlias="TRISB6"/>
@@ -16686,7 +16686,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="UART" name="pubSubUARTConfigurations"/>
-         <value>3765.8415426640945</value>
+         <value>3772.250992649253</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="UART" name="usecaseComboSettings"/>
@@ -16694,7 +16694,7 @@
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.CustomKey" moduleName="UART" name="validate"/>
-         <value>0.1433257437718436</value>
+         <value>0.959731183799276</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.PropertyTokenKey" moduleName="UART" name="uartConfigurationList%0%interruptState"/>
@@ -16851,10 +16851,6 @@
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="UART1" registerAlias="UMODE" settingAlias="UEN" alias="TX_RX_CTS_RTS"/>
          <value>2</value>
-      </entry>
-      <entry>
-         <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="UART1" registerAlias="UMODE" settingAlias="UEN" alias="TX_RX_RTS"/>
-         <value>1</value>
       </entry>
       <entry>
          <key class="com.microchip.mcc.core.tokenManager.OptionKey" moduleName="UART1" registerAlias="UMODE" settingAlias="URXINV" alias="disabled"/>
@@ -17197,122 +17193,122 @@
          <value>disabled</value>
       </entry>
    </tokenMap>
-   <generatedFileHashHistoryMap class="java.util.HashMap">
+   <generatedFileHashHistoryMap class="java.util.TreeMap">
       <entry>
-         <file>mcc_generated_files\interrupt_manager.h</file>
-         <hash>ef552ded76e70633708bd9575aab85e2713ef90e61e994c5f22cf93829b5a505</hash>
-      </entry>
-      <entry>
-         <file>mcc_generated_files\onoff_led3.h</file>
-         <hash>a89344a2c1d5a15b9ea1dd5a6805cdab2e5a0159b29bf0a4adb8c7181e4e6539</hash>
-      </entry>
-      <entry>
-         <file>mcc_generated_files\switch2.h</file>
-         <hash>95482516ddbd3b94f38035bb23151362c851cd1536dff66a2018638990e4e787</hash>
-      </entry>
-      <entry>
-         <file>mcc_generated_files\switch1.h</file>
-         <hash>1b1d343202f5deaf2ea7b590750475231a504bb024d3e25582f7413097b5a95e</hash>
-      </entry>
-      <entry>
-         <file>mcc_generated_files\charlcd1.h</file>
-         <hash>13f72b5b1267b27b5d66318c886c4c84a91dde885d27ec5934d2edcd8c5eae7a</hash>
-      </entry>
-      <entry>
-         <file>mcc_generated_files\switch3.h</file>
-         <hash>2246c2bf8530eb4d3d3ba5e8fd434bb621a4bd642272fd7a36fbcb7b86f4a17c</hash>
-      </entry>
-      <entry>
-         <file>mcc_generated_files\charlcd1.c</file>
-         <hash>0ab4737cc8868bdbf348a1861ceaca57ddf3f14f6ee761750f7b1ef0b6a529fc</hash>
-      </entry>
-      <entry>
-         <file>mcc_generated_files\adc_module_features.h</file>
-         <hash>16fd4c8a0f5140487777b6fc1e192b30caf5d37084464ebd79c2245aaee5e57f</hash>
-      </entry>
-      <entry>
-         <file>mcc_generated_files\onoff_led2.h</file>
-         <hash>4a83a3a7d2938f26fd17f002929dd1435978232fac268594fd449101a3b535e4</hash>
-      </entry>
-      <entry>
-         <file>mcc_generated_files\onoff_led1.h</file>
-         <hash>ec921ce3befd3f29d74a849d0bd0fe328717a4c7f53fc8880919a8a5b1f42112</hash>
-      </entry>
-      <entry>
-         <file>mcc_generated_files\system.h</file>
-         <hash>49a75f7bcc27a427491822d93523540cfba572b53e3b144ae6aa5533f930e351</hash>
-      </entry>
-      <entry>
-         <file>mcc_generated_files\system.c</file>
-         <hash>3e665e870df420fd834eeb367fc7be6a26d82b70dba579e791e4189eab06023c</hash>
-      </entry>
-      <entry>
-         <file>mcc_generated_files\clock.h</file>
-         <hash>2adebdc14c96951afe35ab1407b13a22618cd2ff78352338de21255c7815e609</hash>
-      </entry>
-      <entry>
-         <file>mcc_generated_files\mcc.c</file>
-         <hash>c22c367f259e83dccba56de44283dd17d804e4f88031c7d6065517fb0d3cf25f</hash>
-      </entry>
-      <entry>
-         <file>mcc_generated_files\drivers\uart.c</file>
-         <hash>b53121a99178d2f13f669bd325a6effd6d251e5263fd45426dc2e065ec213d8c</hash>
-      </entry>
-      <entry>
-         <file>mcc_generated_files\mcc.h</file>
-         <hash>aa142b5066cb4d037c5626bd96170b9b2de8d96ef05eb329648a36a4ad061eb6</hash>
-      </entry>
-      <entry>
-         <file>mcc_generated_files\drivers\uart.h</file>
-         <hash>a629a4c4f06519c1d4dc0c356d4b736ee344fd15ee36d3bd4d027ed39137978d</hash>
-      </entry>
-      <entry>
-         <file>mcc_generated_files\uart1.h</file>
-         <hash>b97c958b663f3a551e7d32e8a2323da00031290dd5eb388963b6fd32cc3babb6</hash>
-      </entry>
-      <entry>
-         <file>mcc_generated_files\uart1.c</file>
-         <hash>6eb7f8f1d01062718a9093e5fe2b5bf2a4828a167f04c380e578ad361aed0949</hash>
-      </entry>
-      <entry>
-         <file>mcc_generated_files\tmr1.h</file>
-         <hash>a388eace52d8f51209dddc857d55b4461078a8494c4c47087280c9023bf7f2dd</hash>
-      </entry>
-      <entry>
-         <file>mcc_generated_files\clock.c</file>
-         <hash>d0bdf15381009f7f72d40df2bfb4a6f21064190e140a3f6c216643e44536858a</hash>
+         <file>main.c</file>
+         <hash>bf7a9c1a2601c17a191c38aeabdbeee8954ee12179020f818601616b28505a56</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\adc1.c</file>
          <hash>54d5b9408b43674a74dccec945c9eb76c9f62ac4dadd5ded53daf2e9a6de1ccf</hash>
       </entry>
       <entry>
-         <file>main.c</file>
-         <hash>bf7a9c1a2601c17a191c38aeabdbeee8954ee12179020f818601616b28505a56</hash>
+         <file>mcc_generated_files\adc1.h</file>
+         <hash>500102e2a498ea05e29e89771f289f9b3465209692e1e9ea917ac59b0106a97e</hash>
       </entry>
       <entry>
-         <file>mcc_generated_files\pin_manager.h</file>
-         <hash>277d0e7895996d744d2b85a1c6d9f2030f5045c47f2ed66209a8795ff49f4043</hash>
+         <file>mcc_generated_files\adc_module_features.h</file>
+         <hash>16fd4c8a0f5140487777b6fc1e192b30caf5d37084464ebd79c2245aaee5e57f</hash>
       </entry>
       <entry>
-         <file>mcc_generated_files\tmr1.c</file>
-         <hash>201d746a9f573c9c058ef7b90a7c7d6fe7cb02ee0c64f49fa57c75e0548b782a</hash>
+         <file>mcc_generated_files\charlcd1.c</file>
+         <hash>0ab4737cc8868bdbf348a1861ceaca57ddf3f14f6ee761750f7b1ef0b6a529fc</hash>
       </entry>
       <entry>
-         <file>mcc_generated_files\examples\uart_example.h</file>
-         <hash>d96b932ec571f80f0ed8807ba52a6c30d1b7a025af8ac6172cd4124f03629e7e</hash>
+         <file>mcc_generated_files\charlcd1.h</file>
+         <hash>13f72b5b1267b27b5d66318c886c4c84a91dde885d27ec5934d2edcd8c5eae7a</hash>
       </entry>
       <entry>
-         <file>mcc_generated_files\pin_manager.c</file>
-         <hash>cf5eeb4779e44b7a8a11c74787f84cec9223dc354beca37690137e43a64f9baf</hash>
+         <file>mcc_generated_files\clock.c</file>
+         <hash>d0bdf15381009f7f72d40df2bfb4a6f21064190e140a3f6c216643e44536858a</hash>
+      </entry>
+      <entry>
+         <file>mcc_generated_files\clock.h</file>
+         <hash>2adebdc14c96951afe35ab1407b13a22618cd2ff78352338de21255c7815e609</hash>
+      </entry>
+      <entry>
+         <file>mcc_generated_files\docs\uart.dox</file>
+         <hash>98e8108c480be91b9d680db751409daa16ab284d6e3664e56dff426441d18783</hash>
+      </entry>
+      <entry>
+         <file>mcc_generated_files\drivers\uart.c</file>
+         <hash>b53121a99178d2f13f669bd325a6effd6d251e5263fd45426dc2e065ec213d8c</hash>
+      </entry>
+      <entry>
+         <file>mcc_generated_files\drivers\uart.h</file>
+         <hash>a629a4c4f06519c1d4dc0c356d4b736ee344fd15ee36d3bd4d027ed39137978d</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\examples\uart_example.c</file>
          <hash>494d64ffff1a8713b9956498b0143f7c8ef9465ef7cf451661a6123c91b7f960</hash>
       </entry>
       <entry>
-         <file>mcc_generated_files\docs\uart.dox</file>
-         <hash>98e8108c480be91b9d680db751409daa16ab284d6e3664e56dff426441d18783</hash>
+         <file>mcc_generated_files\examples\uart_example.h</file>
+         <hash>d96b932ec571f80f0ed8807ba52a6c30d1b7a025af8ac6172cd4124f03629e7e</hash>
+      </entry>
+      <entry>
+         <file>mcc_generated_files\interrupt_manager.c</file>
+         <hash>67468235d61729c778d4914787af68f9fed7fd85369f398316b4a9ecd2d50470</hash>
+      </entry>
+      <entry>
+         <file>mcc_generated_files\interrupt_manager.h</file>
+         <hash>ef552ded76e70633708bd9575aab85e2713ef90e61e994c5f22cf93829b5a505</hash>
+      </entry>
+      <entry>
+         <file>mcc_generated_files\mcc.c</file>
+         <hash>c22c367f259e83dccba56de44283dd17d804e4f88031c7d6065517fb0d3cf25f</hash>
+      </entry>
+      <entry>
+         <file>mcc_generated_files\mcc.h</file>
+         <hash>aa142b5066cb4d037c5626bd96170b9b2de8d96ef05eb329648a36a4ad061eb6</hash>
+      </entry>
+      <entry>
+         <file>mcc_generated_files\onoff_led1.h</file>
+         <hash>ec921ce3befd3f29d74a849d0bd0fe328717a4c7f53fc8880919a8a5b1f42112</hash>
+      </entry>
+      <entry>
+         <file>mcc_generated_files\onoff_led2.h</file>
+         <hash>4a83a3a7d2938f26fd17f002929dd1435978232fac268594fd449101a3b535e4</hash>
+      </entry>
+      <entry>
+         <file>mcc_generated_files\onoff_led3.h</file>
+         <hash>a89344a2c1d5a15b9ea1dd5a6805cdab2e5a0159b29bf0a4adb8c7181e4e6539</hash>
+      </entry>
+      <entry>
+         <file>mcc_generated_files\pin_manager.c</file>
+         <hash>cf5eeb4779e44b7a8a11c74787f84cec9223dc354beca37690137e43a64f9baf</hash>
+      </entry>
+      <entry>
+         <file>mcc_generated_files\pin_manager.h</file>
+         <hash>277d0e7895996d744d2b85a1c6d9f2030f5045c47f2ed66209a8795ff49f4043</hash>
+      </entry>
+      <entry>
+         <file>mcc_generated_files\switch1.h</file>
+         <hash>1b1d343202f5deaf2ea7b590750475231a504bb024d3e25582f7413097b5a95e</hash>
+      </entry>
+      <entry>
+         <file>mcc_generated_files\switch2.h</file>
+         <hash>95482516ddbd3b94f38035bb23151362c851cd1536dff66a2018638990e4e787</hash>
+      </entry>
+      <entry>
+         <file>mcc_generated_files\switch3.h</file>
+         <hash>2246c2bf8530eb4d3d3ba5e8fd434bb621a4bd642272fd7a36fbcb7b86f4a17c</hash>
+      </entry>
+      <entry>
+         <file>mcc_generated_files\system.c</file>
+         <hash>3e665e870df420fd834eeb367fc7be6a26d82b70dba579e791e4189eab06023c</hash>
+      </entry>
+      <entry>
+         <file>mcc_generated_files\system.h</file>
+         <hash>49a75f7bcc27a427491822d93523540cfba572b53e3b144ae6aa5533f930e351</hash>
+      </entry>
+      <entry>
+         <file>mcc_generated_files\tmr1.c</file>
+         <hash>201d746a9f573c9c058ef7b90a7c7d6fe7cb02ee0c64f49fa57c75e0548b782a</hash>
+      </entry>
+      <entry>
+         <file>mcc_generated_files\tmr1.h</file>
+         <hash>a388eace52d8f51209dddc857d55b4461078a8494c4c47087280c9023bf7f2dd</hash>
       </entry>
       <entry>
          <file>mcc_generated_files\traps.c</file>
@@ -17323,12 +17319,12 @@
          <hash>934d1b9270c6bc4331fa64a518773f80af9eca803199d88de5037d5f162e5904</hash>
       </entry>
       <entry>
-         <file>mcc_generated_files\adc1.h</file>
-         <hash>500102e2a498ea05e29e89771f289f9b3465209692e1e9ea917ac59b0106a97e</hash>
+         <file>mcc_generated_files\uart1.c</file>
+         <hash>6eb7f8f1d01062718a9093e5fe2b5bf2a4828a167f04c380e578ad361aed0949</hash>
       </entry>
       <entry>
-         <file>mcc_generated_files\interrupt_manager.c</file>
-         <hash>67468235d61729c778d4914787af68f9fed7fd85369f398316b4a9ecd2d50470</hash>
+         <file>mcc_generated_files\uart1.h</file>
+         <hash>b97c958b663f3a551e7d32e8a2323da00031290dd5eb388963b6fd32cc3babb6</hash>
       </entry>
    </generatedFileHashHistoryMap>
 </config>

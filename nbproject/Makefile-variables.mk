@@ -4,7 +4,11 @@
 # NOCDDL
 #
 CND_BASEDIR=`pwd`
-# default configuration
-CND_ARTIFACT_DIR_default=dist/default/production
-CND_ARTIFACT_NAME_default=embeded_PIC24F.production.hex
-CND_ARTIFACT_PATH_default=dist/default/production/embeded_PIC24F.production.hex
+# uart2 configuration
+CND_ARTIFACT_DIR_uart2=dist/uart2/production
+CND_ARTIFACT_NAME_uart2=embeded_PIC24F-master.production.hex
+CND_ARTIFACT_PATH_uart2=dist/uart2/production/embeded_PIC24F-master.production.hex
+# LCD configuration
+CND_ARTIFACT_DIR_LCD=dist/LCD/production
+CND_ARTIFACT_NAME_LCD=embeded_PIC24F-master.production.hex
+CND_ARTIFACT_PATH_LCD=dist/LCD/production/embeded_PIC24F-master.production.hex

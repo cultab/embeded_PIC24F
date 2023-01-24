@@ -22,7 +22,7 @@
 // enable transmission
 #define U_TX 0x0400
 
-// initialise the serial port (UART2, 115200, 8, N, 1, CTS/RTS )
+// initialize the serial port (UART2, 115200, 8, N, 1, CTS/RTS )
 void initU2()
 {
   RPINR19bits.U2RXR = 0x000A;    //RF4->UART2:U2RX
