@@ -167,14 +167,18 @@ static void update_lcd(void) {
 
     printf("\f"); // clear screen
     printf("171014, %5.2f%cC\n\r", (double)temp, CHAR_DEGREE); // print AM, temperature and degree symbol, cast to double to silence warning
-    printf("%s%d: ", STATE_STRING[STATE], SNOOZE_COUNT); // print state
+    printf("%s", STATE_STRING[STATE],);                 // print state
     switch(STATE) {
         case SELECT_TIME: {
-            printf("%ds", SECONDS_SELECTED);  // print selected time
+            printf(": %ds", SECONDS_SELECTED);          // print selected time
+            break;
+        }
+        case SNOOZED: {
+            printf(" %d/%d", SNOOZE_COUNT, MAX_SNOOZE); // print snooze count
             break;
         }
         default: {
-            printf("%ds", SECONDS_REMAINING); // print remaining time
+            printf(": %ds", SECONDS_REMAINING);         // print remaining time
             break;
         }
     }
