@@ -7,6 +7,8 @@
 
 #include "timer.h"
 
+#define SYSTEM_PERIPHERAL_CLOCK 8000000
+
 #ifndef SYSTEM_PERIPHERAL_CLOCK
 #define SYSTEM_PERIPHERAL_CLOCK 16000000
 #pragma message "This module requires a definition for the peripheral clock frequency.  Assuming 16MHz Fcy (32MHz Fosc).  Define value if this is not correct."
@@ -20,6 +22,7 @@
 #define TIMER_ON                    0x8000
 #define GATED_TIME_DISABLED         0x0000
 
+// we use 16bit mode, 32bit mode actually uses 2 timers
 #define TIMER_16BIT_MODE            0x0000
 #define TIMER_32BIT_MODE            0x0004
 
@@ -30,29 +33,31 @@
 #define TIMER_INTERRUPT_PRIORITY    0x0001
 #define TIMER_INTERRUPT_PRIORITY_4  0x0004
 
+// no prescaler
 #define CLOCK_DIVIDER TIMER_PRESCALER_1
-#define PR3_SETTING (SYSTEM_PERIPHERAL_CLOCK/TIMER_TICK_INTERVAL_MICRO_SECONDS/1)
+// period = 1 / (SYSTEM_PERIPHERAL_CLOCK/ 1000 / 4) = 0.001 sec = 1ms
+#define TMR3_PERIOD_SETTING (SYSTEM_PERIPHERAL_CLOCK/TIMER_TICK_INTERVAL_MICRO_SECONDS/4)
 
 #if 0
-#if (PR3_SETTING > 0xFFFF)
+#if (TMR3_PERIOD_SETTING > 0xFFFF)
 #undef CLOCK_DIVIDER
-#undef PR3_SETTING
+#undef TMR3_PERIOD_SETTING
 #define CLOCK_DIVIDER TIMER_PRESCALER_8
-#define PR3_SETTING (SYSTEM_PERIPHERAL_CLOCK/1000/8)
+#define TMR3_PERIOD_SETTING (SYSTEM_PERIPHERAL_CLOCK/1000/8)
 #endif
 
-#if (PR3_SETTING > 0xFFFF)
+#if (TMR3_PERIOD_SETTING > 0xFFFF)
 #undef CLOCK_DIVIDER
-#undef PR3_SETTING
+#undef TMR3_PERIOD_SETTING
 #define CLOCK_DIVIDER TIMER_PRESCALER_64
-#define PR3_SETTING (SYSTEM_PERIPHERAL_CLOCK/1000/64)
+#define TMR3_PERIOD_SETTING (SYSTEM_PERIPHERAL_CLOCK/1000/64)
 #endif
 
-#if (PR3_SETTING > 0xFFFF)
+#if (TMR3_PERIOD_SETTING > 0xFFFF)
 #undef CLOCK_DIVIDER
-#undef PR3_SETTING
+#undef TMR3_PERIOD_SETTING
 #define CLOCK_DIVIDER TIMER_PRESCALER_256
-#define PR3_SETTING (SYSTEM_PERIPHERAL_CLOCK/1000/256)
+#define TMR3_PERIOD_SETTING (SYSTEM_PERIPHERAL_CLOCK/1000/256)
 #endif
 #endif
 
@@ -160,7 +165,7 @@ bool TIMER_SetConfiguration ( TIMER_CONFIGURATIONS configuration )
 
             TMR3_COUNT_REGISTER = 0; // reset register to 0
 
-            TMR3_PERIOD_REGISTER = PR3_SETTING; // set period
+            TMR3_PERIOD_REGISTER = TMR3_PERIOD_SETTING; // set period
             TMR3_CONTROL_REGISTER = TIMER_ON | // set control bits
                     STOP_TIMER_IN_IDLE_MODE |
                     TIMER_SOURCE_INTERNAL |

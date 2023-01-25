@@ -24,10 +24,10 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=embeded_PIC24F-master
+PROJECTNAME=embeded_PIC24F
 
 # Active Configuration
-DEFAULTCONF=LCD
+DEFAULTCONF=uart2
 CONF=${DEFAULTCONF}
 
 # All Configurations

@@ -19,6 +19,8 @@ limitations under the License.
 
 #include "lcd.h"
 
+#define SYSTEM_PERIPHERAL_CLOCK 4000000
+
 #ifndef SYSTEM_PERIPHERAL_CLOCK
 #define SYSTEM_PERIPHERAL_CLOCK 16000000
 #pragma message "This module requires a definition for the peripheral clock frequency.  Assuming 16MHz Fcy (32MHz Fosc).  Define value if this is not correct."
