@@ -33,6 +33,7 @@
 #include "src/adc.h"
 #include "src/lcd.h"
 #include "src/uart2.h"
+#include "src/pins.h"
 
 
 #define MAX_SECONDS 600 /* 600 seconds = 10 minutes */
@@ -41,22 +42,29 @@
 #define LCD_UPDATE_TIME     500 /* ms */
 #define ONE_SECOND         1000 /* ms */
 
+#define BUZZER_FREQUENCY    500 /* Hz */
+#if ( BUZZER_FREQUENCY > 1000 ) /* at most 1000Hz aka 1ms period */
+#define BUZZER_FREQUENCY 1000
+#endif
+
 #define forever for(; ;) /* fun */
 
-#define MAX_SNOOZE 5                   /* amount of times user has to snooze for alarm to stop */
+#define MAX_SNOOZE   5                 /* amount of times user has to snooze for alarm to stop */
 #define SNOOZE_TIME 10                 /* 10 second snooze */
-//#define SNOOZE_TIME SECONDS_SELECTED /* user selected long snooze */
+#ifndef SNOOZE_TIME                    /* if no time set */
+#define SNOOZE_TIME SECONDS_SELECTED   /* use user selected long snooze */
+#endif
 
 static uint16_t SECONDS_REMAINING = 0; /* seconds user has currently selected */
-static uint16_t SECONDS_SELECTED = 0;  /* seconds timer is at, when counting down */
-static uint16_t SNOOZE_COUNT = 0;      /* how many times the user has snoozed the alarm */
+static uint16_t SECONDS_SELECTED =  0; /* seconds timer is at, when counting down */
+static uint16_t SNOOZE_COUNT =      0; /* how many times the user has snoozed the alarm */
 
 /*
  * State of the alarm,
- * SELECT_TIME: the user is selecting the time for the alarm
+ * SELECT_TIME:   the user is selecting the time for the alarm
  * COUNTING_DOWN: the timer is counting down
- * SNOOZED: the timer is counting down after the alarm has gone off and the user snoozed it
- * ALARM: the timer counted down and is now going off (buzzer sounds and led blinks)
+ * SNOOZED:       the timer is counting down after the alarm has gone off and the user snoozed it
+ * ALARM:         the timer counted down and is now going off (buzzer sounds and led blinks)
  */
 static enum State {
     SELECT_TIME,
@@ -71,33 +79,40 @@ static enum State {
 static const char * const STATE_STRING[] = {
 	[SELECT_TIME] = "Select",
 	[COUNTING_DOWN] = "Cntdwn",
-	[SNOOZED] = "Snoozed",
+	[SNOOZED] = "Snooze",
 	[ALARM] = "Alarm"
 };
 
 
-static void update_state(void);  // update state
-static void check_buttons(void); // check for pressed buttons
-static void start_alarm(void);  // register tick in timer for alarm
-static void stop_alarm(void);   // unregister tick and turn led off
-static void alarm(void);        // sound alarm and blink led
-static void update_lcd(void);   // update information on LCD
+static void  update_state(void);  // update state
+static void  check_buttons(void); // check for pressed buttons
+static void  start_alarm(void);   // register handlers in timer for led blink and buzzer
+static void  stop_alarm(void);    // unregister tick and turn led off
+static void  blink_led(void);     // blink led
+static void  buzz_buzzer(void);   // make sound
+static void  update_lcd(void);    // update information on LCD
 static float adc_to_celcius(int mV); // convert temperature sensor output from adc to celsius
 
 
 int main(void) {
     // initialize the device
-     initU2(); /* for debugging */
-//    LCD_Initialize();
-    init_button(100);
+//     initU2(); /* for debugging */
+    LCD_Initialize();
+    init_button(BUTTON_EVENT_TIME * 10); // debounce of 10 cycles
 
     // init ADC
     ADC_SetConfiguration(ADC_CONFIGURATION_DEFAULT);
     ADC_ChannelEnable(ADC_CHANNEL_TEMPERATURE_SENSOR);
+
+    {
+        LED_EX_TRIS = PIN_OUTPUT;
+        LED_EX_REG = 1;
+        BUZZER_TRIS = PIN_OUTPUT;
+        BUZZER_REG = 0;
+    }
     
-    // enable leds we are going to use
+    // enable the status led
     LED_Enable(LED_D3);
-    LED_Enable(LED_D4);
 
     // setup timers
     TIMER_SetConfiguration(TIMER_CONFIGURATION_1MS);
@@ -117,6 +132,7 @@ static void update_state(void) {
         if (SECONDS_REMAINING) {
             SECONDS_REMAINING--;
         } else {
+            start_alarm();
             STATE = ALARM;
         }
         break;
@@ -129,14 +145,13 @@ static void update_state(void) {
         } else if (SECONDS_REMAINING) {
             SECONDS_REMAINING--;
         } else {
+            start_alarm();
             STATE = ALARM;
             SNOOZE_COUNT++;
         }
         break;    
     }
-    case ALARM: {
-        start_alarm();
-    }
+    case ALARM:       /* fallthrough */
     case SELECT_TIME: /* fallthrough */
     default:
         break;
@@ -144,20 +159,64 @@ static void update_state(void) {
                 
 }
 
+/*
+ * STATE must be set to ALARM just after calling
+ * to make sure the handlers don't get Requested more than once from the timer
+ * 
+ * Schedules handlers to toggle the LED and sound the buzzer/speaker.
+ * 
+ */
 static void start_alarm(void) {
-    TIMER_RequestTick(&alarm, LCD_UPDATE_TIME);
+    if (STATE != ALARM) {
+        TIMER_RequestTick(&blink_led, ONE_SECOND);
+        TIMER_RequestTick(&buzz_buzzer, 1000/BUZZER_FREQUENCY); /* T(sec) = 1/f(Hz) */
+    }
 }
 
+/*
+ * Removes LED toggle and buzzer handlers
+ * and turns the LED and buzzer off.
+ */
 static void stop_alarm(void) {
-    TIMER_CancelTick(&alarm);
-    /* turn buzzer off */
-    LED_Off(LED_D4);
+    TIMER_CancelTick(&blink_led);
+    TIMER_CancelTick(&buzz_buzzer);
+    LED_EX_LATCH = 0;
+    BUZZER_LATCH = 0;
 }
 
-static void alarm(void) {
-    LED_Toggle(LED_D4);
-    /* turn buzzer on */
+static void blink_led(void) {
+    LED_EX_LATCH ^= 1;
 }
+
+//static uint16_t BUZZ_COUNT = 0;
+//static uint16_t BUZZ_INDEX = 0;
+//static uint16_t BUZZ_PATTERN[] = {4,1,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
+//                                  3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
+//                                  2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
+//                                  1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+//                                  2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
+//                                  3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
+//};
+//#define BUZZ_PATTERN_SIZE sizeof(BUZZ_PATTERN)/sizeof(uint16_t)
+//
+//static void buzz_buzzer(void) {
+//    
+//    if (BUZZ_COUNT == BUZZ_PATTERN[BUZZ_INDEX]) {
+//        BUZZER_LATCH ^= 1;
+//        BUZZ_COUNT = 0;
+//        if (BUZZ_INDEX < BUZZ_PATTERN_SIZE) {
+//            BUZZ_INDEX++;
+//        } else {
+//            BUZZ_INDEX = 0;
+//        }
+//    } else {
+//        BUZZ_COUNT++;
+//    }
+//}
+static void buzz_buzzer(void) {
+    BUZZER_LATCH ^= 1;
+}
+
 
 #define CHAR_DEGREE 0xDF
 
@@ -167,14 +226,14 @@ static void update_lcd(void) {
 
     printf("\f"); // clear screen
     printf("171014, %5.2f%cC\n\r", (double)temp, CHAR_DEGREE); // print AM, temperature and degree symbol, cast to double to silence warning
-    printf("%s", STATE_STRING[STATE],);                 // print state
+    printf("%s", STATE_STRING[STATE]);                 // print state
     switch(STATE) {
         case SELECT_TIME: {
             printf(": %ds", SECONDS_SELECTED);          // print selected time
             break;
         }
         case SNOOZED: {
-            printf(" %d/%d", SNOOZE_COUNT, MAX_SNOOZE); // print snooze count
+            printf(" %d/%d: %ds", SNOOZE_COUNT + 1, MAX_SNOOZE, SECONDS_REMAINING); // print snooze count and remaining time
             break;
         }
         default: {

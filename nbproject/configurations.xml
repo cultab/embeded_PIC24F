@@ -52,7 +52,7 @@
         <platformTool>Simulator</platformTool>
         <languageToolchain>XC16</languageToolchain>
         <languageToolchainVersion>2.00</languageToolchainVersion>
-        <platform>3</platform>
+        <platform>2</platform>
       </toolsSet>
       <packs>
         <pack name="PIC24F-GA-GB_DFP" vendor="Microchip" version="1.8.217"/>
@@ -1383,10 +1383,10 @@
         <targetDevice>PIC24FJ1024GB610</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>Simulator</platformTool>
+        <platformTool>PKOBSKDEPlatformTool</platformTool>
         <languageToolchain>XC16</languageToolchain>
         <languageToolchainVersion>2.00</languageToolchainVersion>
-        <platform>3</platform>
+        <platform>2</platform>
       </toolsSet>
       <packs>
         <pack name="PIC24F-GA-GB_DFP" vendor="Microchip" version="1.8.217"/>
@@ -2654,6 +2654,10 @@
         <property key="programoptions.testmodeentrymethod" value="VDDFirst"/>
         <property key="voltagevalue" value="3.25"/>
       </pk4hybrid>
+      <item path="src/uart2.c" ex="true" overriding="false">
+      </item>
+      <item path="src/uart2.h" ex="true" overriding="false">
+      </item>
       <item path="system.c" ex="true" overriding="false">
         <C30>
         </C30>

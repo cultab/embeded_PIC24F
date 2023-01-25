@@ -27,6 +27,11 @@ struct {
 
 } TRISAbits;
 struct {
+    int TRISB8;
+    int TRISB9;
+
+} TRISBbits;
+struct {
     int TRISD6;
     int TRISD7;
     int TRISD13;
@@ -120,5 +125,15 @@ struct {
 #define S6_ANSEL ANSDbits.ANSD7
 #define S5_ANSEL ANSAbits.ANSA7
 //      S4_ANSEL D13 doesn't have an ANSEL
+//
+
+// Extra LED and  buzzer
+#define LED_EX_REG   PORTBbits.RB8
+#define LED_EX_LATCH LATBbits.LATB8
+#define LED_EX_TRIS  TRISBbits.TRISB8
+
+#define BUZZER_REG   PORTBbits.RB9
+#define BUZZER_LATCH LATBbits.LATB9
+#define BUZZER_TRIS  TRISBbits.TRISB9
 
 #endif // PINS_H
