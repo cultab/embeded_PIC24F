@@ -64,7 +64,7 @@ uint8_t ADC_ReadPercentage( ADC_CHANNEL channel )
 *        may be ported to other boards).
 *         i.e. - ADCReadPercentage(ADC_CHANNEL_POTENTIOMETER);
 *
-* Output: uint16_t the right adjusted 10-bit representation of the ADC
+* Output: uint16_t the right adjusted 12-bit representation of the ADC
 *         channel conversion or 0xFFFF for an error.
 *
 ********************************************************************/
@@ -72,6 +72,7 @@ uint16_t ADC_Read12bit(ADC_CHANNEL channel)
 {
     uint16_t i;
     
+    // error on bad channel id
     switch(channel)
     {
         case ADC_CHANNEL_5:
@@ -94,6 +95,7 @@ uint16_t ADC_Read12bit(ADC_CHANNEL channel)
     } 
 
     ADC_SAMPLE_ENABLE_BIT = 0;           //stop sampling
+    // FIX: delete the folowing?
     for(i=0;i<1000;i++)
     {
         Nop(); //Sample delay, conversion start automatically

@@ -31,15 +31,20 @@ struct {
 } IEC0bits;
 #endif/*}}}*/
 
+// interupt priority
 #define TMR3_INTERUPT_PRIORITY IPC2bits.T3IP
+// whether an interupt is happening
 #define TMR3_INTERUPT_FLAG     IFS0bits.T3IF
+// enable/disable interupt from timer
 #define TMR3_INTERUPT_ENABLE   IEC0bits.T3IE
 
+// register that contains counter for timer
 #define TMR3_COUNT_REGISTER   TMR3
+// register that contains period value
 #define TMR3_PERIOD_REGISTER  PR3
+// control register
 #define TMR3_CONTROL_REGISTER T3CON
 
-/* Type Definitions ***********************************************/
 typedef void (*TICK_HANDLER)(void);
 
 typedef enum

@@ -102,8 +102,10 @@ int main(void) {
 
     // init ADC
     ADC_SetConfiguration(ADC_CONFIGURATION_DEFAULT);
+    // enable temperature sensor channel
     ADC_ChannelEnable(ADC_CHANNEL_TEMPERATURE_SENSOR);
 
+    // init and enable LED and Speaker pins
     {
         LED_EX_TRIS = PIN_OUTPUT;
         LED_EX_REG = 1;
@@ -138,13 +140,19 @@ static void update_state(void) {
         break;
     }
     case SNOOZED: {
+        /* if snoozed 5 times,
+         * go back to SELECT_TIME
+         * and reset SECONDS_REMAINING and SNOOZE_COUNT
+         */
         if (SNOOZE_COUNT == 5) {
             STATE = SELECT_TIME;
             SECONDS_REMAINING = 0;
             SNOOZE_COUNT = 0;
         } else if (SECONDS_REMAINING) {
+        // else if there is still time, count down
             SECONDS_REMAINING--;
         } else {
+        // else start the alarm
             start_alarm();
             STATE = ALARM;
             SNOOZE_COUNT++;
@@ -184,44 +192,23 @@ static void stop_alarm(void) {
     BUZZER_LATCH = 0;
 }
 
+// toggles led's latch
 static void blink_led(void) {
     LED_EX_LATCH ^= 1;
 }
 
-//static uint16_t BUZZ_COUNT = 0;
-//static uint16_t BUZZ_INDEX = 0;
-//static uint16_t BUZZ_PATTERN[] = {4,1,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
-//                                  3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
-//                                  2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
-//                                  1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-//                                  2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
-//                                  3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
-//};
-//#define BUZZ_PATTERN_SIZE sizeof(BUZZ_PATTERN)/sizeof(uint16_t)
-//
-//static void buzz_buzzer(void) {
-//    
-//    if (BUZZ_COUNT == BUZZ_PATTERN[BUZZ_INDEX]) {
-//        BUZZER_LATCH ^= 1;
-//        BUZZ_COUNT = 0;
-//        if (BUZZ_INDEX < BUZZ_PATTERN_SIZE) {
-//            BUZZ_INDEX++;
-//        } else {
-//            BUZZ_INDEX = 0;
-//        }
-//    } else {
-//        BUZZ_COUNT++;
-//    }
-//}
+// toggles buzzer's latch
 static void buzz_buzzer(void) {
     BUZZER_LATCH ^= 1;
 }
 
-
+// degree character hex value
 #define CHAR_DEGREE 0xDF
 
 static void update_lcd(void) {
+    // read from ADC
     uint16_t value = ADC_Read12bit(ADC_CHANNEL_TEMPERATURE_SENSOR);
+    // convert adc value to temperature
     float temp = adc_to_celcius(value);
 
     printf("\f"); // clear screen
@@ -264,11 +251,13 @@ static void check_buttons(void) {
     if (debounce_button_pressed(BUTTON_S3)) {
         /* do ENTER/SNOOZE action*/
         switch (STATE) {
+            // if we are selecting the time, ENTER starts the countdown
             case SELECT_TIME: {
                 STATE = COUNTING_DOWN;
                 SECONDS_REMAINING = SNOOZE_TIME;
                 break;
             }
+            // if we are sounding the alarm, ENTER snoozes the alarm
             case ALARM: {
                 stop_alarm();
                 SECONDS_REMAINING = SNOOZE_TIME;
@@ -284,7 +273,6 @@ static void check_buttons(void) {
  * TC1047/TC1047A temperature sensor 
  *
  * See: https://ww1.microchip.com/downloads/aemDocuments/documents/APID/ProductDocuments/DataSheets/21498D.pdf
- *
  * 
  * adc(int) / 4096 = mV / (Vref+ - Vref-)
  * mV = (adc / 4096) * (Vref+ - Vref-) (1)

@@ -38,7 +38,7 @@ bool debounce_button_pressed(BUTTON btn) {
         return true;
     } 
 
-    /* always subtract from debounce */
+    /* always subtract from debounce, but don't go below 0 */
     if (BUTTON_DEBOUNCE[btn] > 0) {
         BUTTON_DEBOUNCE[btn] -= 1;   
     }

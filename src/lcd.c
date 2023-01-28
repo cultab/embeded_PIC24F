@@ -57,6 +57,7 @@ limitations under the License.
 
 #define LCD_SendData(data) { ADDR1 = data; LCD_Wait(LCD_F_INSTR); }
 #define LCD_SendCommand(command, delay) { ADDR0 = command; LCD_Wait(delay); }
+// special character definitions
 #define LCD_COMMAND_CLEAR_SCREEN        0x01
 #define LCD_COMMAND_RETURN_HOME         0x02
 #define LCD_COMMAND_ENTER_DATA_MODE     0x06

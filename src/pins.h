@@ -2,7 +2,11 @@
 #define PINS_H
 // #include "p24FJ1024GB610.h"
 
-// HACK: Stop clangd from yelling about undeclared identifiers.
+/*
+ * HACK: Stop clangd from yelling about undeclared identifiers.
+ *
+ * dummy definitions so static analisis tools don't freak out
+ */
 #ifdef __clang__/*{{{*/
 struct {
     int LATA0;
@@ -89,7 +93,7 @@ struct {
 #define ANALOG      1
 #define DIGITAL     0
 
-// LEDs
+// LED latches
 #define LED_D3_LAT      LATAbits.LATA0
 #define LED_D4_LAT      LATAbits.LATA1
 #define LED_D5_LAT      LATAbits.LATA2

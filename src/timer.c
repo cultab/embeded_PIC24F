@@ -16,16 +16,21 @@
 
 
 /* Definitions *****************************************************/
+// stop while idle (?)
 #define STOP_TIMER_IN_IDLE_MODE     0x2000
+// oscillator source
 #define TIMER_SOURCE_INTERNAL       0x0000
 #define TIMER_SOURCE_EXTERNAL       0x0002
+// turn timer on
 #define TIMER_ON                    0x8000
+// (?)
 #define GATED_TIME_DISABLED         0x0000
 
 // we use 16bit mode, 32bit mode actually uses 2 timers
 #define TIMER_16BIT_MODE            0x0000
 #define TIMER_32BIT_MODE            0x0004
 
+// oscillator postscaler or timer prescaler
 #define TIMER_PRESCALER_1           0x0000
 #define TIMER_PRESCALER_8           0x0010
 #define TIMER_PRESCALER_64          0x0020
@@ -38,7 +43,7 @@
 // period = 1 / (SYSTEM_PERIPHERAL_CLOCK/ 1000 / 4) = 0.001 sec = 1ms
 #define TMR3_PERIOD_SETTING (SYSTEM_PERIPHERAL_CLOCK/TIMER_TICK_INTERVAL_MICRO_SECONDS/4)
 
-#if 0
+#if 0 // disabled, we know that TMR3_PERIOD_SETTING is < 0xFFFF
 #if (TMR3_PERIOD_SETTING > 0xFFFF)
 #undef CLOCK_DIVIDER
 #undef TMR3_PERIOD_SETTING
@@ -121,7 +126,7 @@ bool TIMER_RequestTick ( TICK_HANDLER handle , uint32_t rate )
 {
     uint8_t i;
 	
-    if(configured == false)
+    if(configured == false) // early return if unconfigured
     {
         return false;
     }
@@ -210,6 +215,7 @@ void __attribute__((__interrupt__, auto_psv)) _T3Interrupt( void )
 {
     uint8_t i;
 
+    // for each request, run the handler if .count = .rate
     for(i = 0; i < TIMER_MAX_1MS_CLIENTS; i++)
     {
         if(requests[i].handle != NULL)

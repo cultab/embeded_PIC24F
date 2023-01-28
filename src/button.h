@@ -15,6 +15,7 @@ typedef enum {
         // S1 is MCLR
 } BUTTON;
 
+// convert BUTTON to string, for debugging
 static const char * const BUTTON_STRING[] = {
 	[BUTTON_NONE] = "none",
 	[BUTTON_S3] = "s3",
