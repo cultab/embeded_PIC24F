@@ -1,0 +1,663 @@
+{
+  "uuid": "c47872bff2b19e5aa04f8e7ea378d0e5",
+  "path": "Offline/pic24",
+  "name": "pic24",
+  "content": "",
+  "created_at": "2023-01-27 22:29:58",
+  "updated_at": "2023-01-28 21:21:21",
+  "stick": "",
+  "documents": [
+    {
+      "uuid": "62d80869a579beef85e77d2b63bd19f7",
+      "title": "Sheet_1",
+      "description": "",
+      "docType": "1",
+      "master": "",
+      "thumb": "/images/thumb-default.png",
+      "components": {
+        "ef17ded42402492f8c2986f18ec25031": 1,
+        "40be3d9a3ba67cafeda2d380977f6237": 1,
+        "b0248eb51e084227889f2cb84eab79c4": 22,
+        "5c1036b53a4146e4841df4ed0a9de8f0": 4,
+        "5cbe824183374fac8e4c1ae848199ce3": 2,
+        "caa7002997e549f897556a059b0baca5": 1,
+        "27f26b8381e44b5bbe4099b913554c93": 1,
+        "01d4da36216546d5805a8e8aef4ea569": 1,
+        "24eeb2ceca08480b92b847b6a310acda": 20,
+        "7e6edb7b3f25455d97b9544648316b30": 1,
+        "a4eacdcb63554cb08b3b56477817ab57": 1,
+        "b82150387a2041b4afd55b90c79c5923": 7,
+        "33c6f43fb7ef409dae5b754972bfd9ed": 1,
+        "a09d6c9760d6498a9931e69718377cf8": 2,
+        "524d6048974148e3acf5396310500b9d": 1,
+        "cf153b6631ff4f7daf1880029316df26": 1,
+        "daa3cf3493c84fa3b0b6a6d427d23f0b": 1,
+        "83ffb969eb52476d87a6533387b167a9": 1,
+        "b5b9cef3639645ecaff7ecc0c55660b7": 1,
+        "e33cc1be9d5e4d929dda60b4eb023d72": 2,
+        "bdc610dff263454da181754abcd2ce9e": 1,
+        "a2b2ccf9923342ac94fad38511e97f48": 1,
+        "255fd33dd435463e98673b3e52dbb2b1": 2
+      },
+      "BOM": [
+        [
+          "Value",
+          "Quantity",
+          "Package",
+          "Components",
+          "CustomPara"
+        ],
+        [
+          "0.1u",
+          2,
+          "C0603",
+          "C1,C2",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "f8151fdc728a41ebbc304e11d39e5437",
+            "uuid": "24eeb2ceca08480b92b847b6a310acda"
+          }
+        ],
+        [
+          "0.022uF 25V",
+          1,
+          "C0603",
+          "C3",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "f8151fdc728a41ebbc304e11d39e5437",
+            "uuid": "24eeb2ceca08480b92b847b6a310acda"
+          }
+        ],
+        [
+          "0.010uF 25V",
+          2,
+          "C0603",
+          "C4,C23",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "f8151fdc728a41ebbc304e11d39e5437",
+            "uuid": "24eeb2ceca08480b92b847b6a310acda"
+          }
+        ],
+        [
+          "10uF 25V",
+          6,
+          "C0805",
+          "C5,C12,C13,C14,C17,C18",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "2ee8eb13a0124a108e622ce40c0c25a8",
+            "uuid": "b82150387a2041b4afd55b90c79c5923"
+          }
+        ],
+        [
+          "10uF 25V",
+          5,
+          "C0603",
+          "C6,C7,C8,C9,C11",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "BOM_Manufacturer": "",
+            "puuid": "f8151fdc728a41ebbc304e11d39e5437",
+            "uuid": "24eeb2ceca08480b92b847b6a310acda"
+          }
+        ],
+        [
+          "0.010uF 25V",
+          1,
+          "C0805",
+          "C10",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "2ee8eb13a0124a108e622ce40c0c25a8",
+            "uuid": "b82150387a2041b4afd55b90c79c5923"
+          }
+        ],
+        [
+          "1uF 16V",
+          2,
+          "C0603",
+          "C15,C22",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "f8151fdc728a41ebbc304e11d39e5437",
+            "uuid": "24eeb2ceca08480b92b847b6a310acda"
+          }
+        ],
+        [
+          "0.1uF 50V",
+          4,
+          "C0603",
+          "C16,C19,C20,C21",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "f8151fdc728a41ebbc304e11d39e5437",
+            "uuid": "24eeb2ceca08480b92b847b6a310acda"
+          }
+        ],
+        [
+          "27pF 50V",
+          2,
+          "C0603",
+          "C24,C25",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "f8151fdc728a41ebbc304e11d39e5437",
+            "uuid": "24eeb2ceca08480b92b847b6a310acda"
+          }
+        ],
+        [
+          "15pF 50V",
+          2,
+          "C0603",
+          "C26,C27",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "f8151fdc728a41ebbc304e11d39e5437",
+            "uuid": "24eeb2ceca08480b92b847b6a310acda"
+          }
+        ],
+        [
+          "DIODE-SCHOTTKY-B340A",
+          1,
+          "SMA-DIODE",
+          "D1",
+          {
+            "BOM_Manufacturer Part": "",
+            "puuid": "337432f6b6df4aa98c51149f6eadbf33",
+            "uuid": "7e6edb7b3f25455d97b9544648316b30"
+          }
+        ],
+        [
+          "ROHM: RSX101MM-30TR",
+          1,
+          "AXE_DIODO_SOD-123",
+          "D2",
+          {
+            "BOM_Supplier Part": "755-RSX101MM-30TR",
+            "BOM_Supplier": "Mouser",
+            "BOM_Price": "0.84",
+            "BOM_Manufacturer Part": "",
+            "puuid": "9edab6595f3a43389e9f016b5dfc722d",
+            "uuid": "83ffb969eb52476d87a6533387b167a9"
+          }
+        ],
+        [
+          "LED-0603_R",
+          2,
+          "LED0603_RED",
+          "D3,EX_LED0",
+          {
+            "BOM_Manufacturer": "EVERLIGHT(台湾亿光)",
+            "BOM_Manufacturer Part": "19-217/R6C-AL1M2VY/3T",
+            "BOM_Supplier Part": "C72044",
+            "BOM_Supplier": "LCSC",
+            "puuid": "1efb3a885b5b4aecb6d41221a8f4d86b",
+            "uuid": "5cbe824183374fac8e4c1ae848199ce3"
+          }
+        ],
+        [
+          "1N4007W",
+          2,
+          "SOD-123_L2.8-W1.8-LS3.7-RD",
+          "D4,D5",
+          {
+            "BOM_Supplier": "LCSC",
+            "BOM_Supplier Part": "C328592",
+            "BOM_Manufacturer": "BLUE ROCKET",
+            "BOM_Manufacturer Part": "1N4007W",
+            "puuid": "60a676d313ae48718a81c380b73dfe4f",
+            "uuid": "e33cc1be9d5e4d929dda60b4eb023d72"
+          }
+        ],
+        [
+          "SZMM3Z5V1ST1G",
+          1,
+          "DIODE",
+          "D6",
+          {
+            "BOM_Manufacturer Part": "",
+            "puuid": "67755c3091a74bf48d3423fa025464f2",
+            "uuid": "bdc610dff263454da181754abcd2ce9e"
+          }
+        ],
+        [
+          "DC005-2.0MM",
+          1,
+          "DC-IN-TH_DC005",
+          "DC1",
+          {
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer": "SOFNG",
+            "BOM_Manufacturer Part": "DC005-2.0MM",
+            "BOM_Supplier Part": "C111567",
+            "puuid": "1337670005c6484c999f9b4c272ee9fe",
+            "uuid": "daa3cf3493c84fa3b0b6a6d427d23f0b"
+          }
+        ],
+        [
+          "Magnetic Inductor",
+          1,
+          "INDUCTOR",
+          "FB1",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "92e9c37bc2d3430e92988cf3e547a404",
+            "uuid": "33c6f43fb7ef409dae5b754972bfd9ed"
+          }
+        ],
+        [
+          "MCP1727-3002E_SN",
+          1,
+          "SOIC127P600X175-8N",
+          "IC1",
+          {
+            "BOM_Manufacturer Part": "",
+            "puuid": "d4268d7c5dc441fc89e1db1f45fbbca5",
+            "uuid": "cf153b6631ff4f7daf1880029316df26"
+          }
+        ],
+        [
+          "Jumper",
+          2,
+          "JUMPER WIRE",
+          "J1,J3",
+          {
+            "BOM_Supplier": "",
+            "BOM_Supplier Part": "NONE",
+            "BOM_Manufacturer": "NONE",
+            "BOM_Manufacturer Part": "NONE",
+            "puuid": "33c7d4e297c64965a610daedd621c84f",
+            "uuid": "a09d6c9760d6498a9931e69718377cf8"
+          }
+        ],
+        [
+          "4.7uH",
+          1,
+          "L0603",
+          "L1",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "1f261cf72cb1479ca32177c31156ede3",
+            "uuid": "a4eacdcb63554cb08b3b56477817ab57"
+          }
+        ],
+        [
+          "TSB1G7000",
+          1,
+          "LCD_FOOT_WIZARD",
+          "LCD0",
+          {
+            "BOM_Manufacturer": "",
+            "BOM_Manufacturer Part": "TSB1G7000",
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "puuid": "e812e7e6684d48c69eb4743bec88d927",
+            "uuid": "27f26b8381e44b5bbe4099b913554c93"
+          }
+        ],
+        [
+          "K2-3.6×6.1_SMD",
+          4,
+          "KEY-SMD_2P-L6.2-W3.6-LS8.0",
+          "POWER_TOGGLE,S3,S4,S5",
+          {
+            "BOM_Supplier Part": "C118141",
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer Part": "K2-1107ST-A4SW-06",
+            "puuid": "daacbe2eec304950b61eef2efe596556",
+            "uuid": "5c1036b53a4146e4841df4ed0a9de8f0"
+          }
+        ],
+        [
+          "Oscilator 8Mhz",
+          1,
+          "R1206",
+          "Q1",
+          {
+            "BOM_Manufacturer Part": "",
+            "puuid": "fb183365050043c2b0d857b811a37cfe",
+            "uuid": "255fd33dd435463e98673b3e52dbb2b1"
+          }
+        ],
+        [
+          "Oscilator 32.768khz",
+          1,
+          "R1206",
+          "Q2",
+          {
+            "BOM_Manufacturer Part": "",
+            "puuid": "fb183365050043c2b0d857b811a37cfe",
+            "uuid": "255fd33dd435463e98673b3e52dbb2b1"
+          }
+        ],
+        [
+          "1k",
+          1,
+          "R0603",
+          "R1",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "398691f1f785460098bbe5ee6590333c",
+            "uuid": "b0248eb51e084227889f2cb84eab79c4"
+          }
+        ],
+        [
+          "2k",
+          7,
+          "R0603",
+          "R2,R10,R11,R13,R17,R20,R22",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "398691f1f785460098bbe5ee6590333c",
+            "uuid": "b0248eb51e084227889f2cb84eab79c4"
+          }
+        ],
+        [
+          "20k",
+          3,
+          "R0603",
+          "R3,R6,R7",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "398691f1f785460098bbe5ee6590333c",
+            "uuid": "b0248eb51e084227889f2cb84eab79c4"
+          }
+        ],
+        [
+          "470R",
+          3,
+          "R0603",
+          "R4,R5,R8",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "398691f1f785460098bbe5ee6590333c",
+            "uuid": "b0248eb51e084227889f2cb84eab79c4"
+          }
+        ],
+        [
+          "36k",
+          5,
+          "R0603",
+          "R9,R12,R15,R19,R21",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "398691f1f785460098bbe5ee6590333c",
+            "uuid": "b0248eb51e084227889f2cb84eab79c4"
+          }
+        ],
+        [
+          "82R",
+          1,
+          "R0603",
+          "R14",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "398691f1f785460098bbe5ee6590333c",
+            "uuid": "b0248eb51e084227889f2cb84eab79c4"
+          }
+        ],
+        [
+          "43k",
+          1,
+          "R0603",
+          "R16",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "398691f1f785460098bbe5ee6590333c",
+            "uuid": "b0248eb51e084227889f2cb84eab79c4"
+          }
+        ],
+        [
+          "200k",
+          1,
+          "R0603",
+          "R18",
+          {
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "BOM_Manufacturer Part": "",
+            "puuid": "398691f1f785460098bbe5ee6590333c",
+            "uuid": "b0248eb51e084227889f2cb84eab79c4"
+          }
+        ],
+        [
+          "TC1047AVNBTR",
+          1,
+          "SOT-23-3_L2.9-W1.6-P1.90-LS2.8-BR",
+          "TEMP0",
+          {
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer": "MICROCHIP(美国微芯)",
+            "BOM_Manufacturer Part": "TC1047AVNBTR",
+            "BOM_Supplier Part": "C50052",
+            "BOM_JLCPCB Part Class": "Extended Part",
+            "puuid": "b3b82869fa924bae820e3a6cfb44d689",
+            "uuid": "40be3d9a3ba67cafeda2d380977f6237"
+          }
+        ],
+        [
+          "PIC24FJ1024GB610-I/PT",
+          1,
+          "TQFP-100_L12.0-W12.0-P0.40-LS14.0-BL",
+          "U1",
+          {
+            "BOM_Supplier": "LCSC",
+            "BOM_Supplier Part": "C635616",
+            "BOM_Manufacturer": "MICROCHIP(美国微芯)",
+            "BOM_Manufacturer Part": "PIC24FJ1024GB610-I/PT",
+            "BOM_JLCPCB Part Class": "Extended Part",
+            "puuid": "af5c9349f0054dd092f5581956764f3a",
+            "uuid": "ef17ded42402492f8c2986f18ec25031"
+          }
+        ],
+        [
+          "SPKR",
+          1,
+          "SPEAKER_FOOT",
+          "U2",
+          {
+            "BOM_Manufacturer": "",
+            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "puuid": "942a173110b34fbdb2bc970354bd2931",
+            "uuid": "caa7002997e549f897556a059b0baca5"
+          }
+        ],
+        [
+          "MCP16323T-150ENG",
+          1,
+          "MCHP-VQFN-NG16",
+          "U3",
+          {
+            "BOM_Manufacturer Part": "",
+            "puuid": "3d8055dddd384c4f94f6953937abf0da",
+            "uuid": "01d4da36216546d5805a8e8aef4ea569"
+          }
+        ],
+        [
+          "MBR0520LT1G",
+          1,
+          "MBR0520LT1G",
+          "U4",
+          {
+            "BOM_Manufacturer": "",
+            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "puuid": "5b39dae19426448e9fc3c48eceed3277",
+            "uuid": "524d6048974148e3acf5396310500b9d"
+          }
+        ],
+        [
+          "NC7WZ14EP6X",
+          1,
+          "7×7MM",
+          "U5",
+          {
+            "BOM_Manufacturer Part": "",
+            "puuid": "d7fca7b6d3074f74a4b43eaaab30740b",
+            "uuid": "b5b9cef3639645ecaff7ecc0c55660b7"
+          }
+        ],
+        [
+          "BAT54c",
+          1,
+          "BAT54C",
+          "U6",
+          {
+            "BOM_Manufacturer": "",
+            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "",
+            "BOM_Supplier": "",
+            "puuid": "756c5a2c3cba4c8ab3819cf2333555bb",
+            "uuid": "a2b2ccf9923342ac94fad38511e97f48"
+          }
+        ]
+      ],
+      "updateTime": 1674933681,
+      "createTime": 1674851399,
+      "histories": [],
+      "created_at": "2023-01-27 22:29:59",
+      "updated_at": "2023-01-28 21:21:21"
+    },
+    {
+      "uuid": "37c5a11fb1cdafda829cf30383de52fb",
+      "puuid": "c47872bff2b19e5aa04f8e7ea378d0e5",
+      "title": "PCB_pic24",
+      "filename": "PCB_pic24.json",
+      "description": "",
+      "docType": "3",
+      "master": "",
+      "thumb": "/images/thumb-default.png",
+      "components": {
+        "f8151fdc728a41ebbc304e11d39e5437": 2,
+        "1efb3a885b5b4aecb6d41221a8f4d86b": 2,
+        "e812e7e6684d48c69eb4743bec88d927": 1,
+        "398691f1f785460098bbe5ee6590333c": 13,
+        "daacbe2eec304950b61eef2efe596556": 3,
+        "b3b82869fa924bae820e3a6cfb44d689": 1,
+        "af5c9349f0054dd092f5581956764f3a": 1,
+        "942a173110b34fbdb2bc970354bd2931": 1
+      },
+      "BOM": [],
+      "updateTime": 1674860151,
+      "createTime": 1674860151,
+      "histories": [],
+      "created_at": "2023-01-28 00:55:51",
+      "updated_at": "2023-01-28 00:55:51"
+    },
+    {
+      "uuid": "5443e43aab3d862c33d171157987380a",
+      "puuid": "c47872bff2b19e5aa04f8e7ea378d0e5",
+      "title": "PCB_pic24_2",
+      "filename": "PCB_pic24_2.json",
+      "description": "",
+      "docType": "3",
+      "master": "",
+      "thumb": "/images/thumb-default.png",
+      "components": {
+        "f8151fdc728a41ebbc304e11d39e5437": 2,
+        "1efb3a885b5b4aecb6d41221a8f4d86b": 2,
+        "e812e7e6684d48c69eb4743bec88d927": 1,
+        "398691f1f785460098bbe5ee6590333c": 13,
+        "daacbe2eec304950b61eef2efe596556": 3,
+        "b3b82869fa924bae820e3a6cfb44d689": 1,
+        "af5c9349f0054dd092f5581956764f3a": 1,
+        "942a173110b34fbdb2bc970354bd2931": 1
+      },
+      "BOM": [],
+      "updateTime": 1674864369,
+      "createTime": 1674861093,
+      "histories": [],
+      "created_at": "2023-01-28 01:11:33",
+      "updated_at": "2023-01-28 02:06:09"
+    },
+    {
+      "uuid": "a3d2e4eb157db584cee6788f786d010d",
+      "puuid": "c47872bff2b19e5aa04f8e7ea378d0e5",
+      "title": "PCB_pic24_3",
+      "filename": "PCB_pic24_3.json",
+      "description": "",
+      "docType": "3",
+      "master": "",
+      "thumb": "/images/thumb-default.png",
+      "components": {
+        "f8151fdc728a41ebbc304e11d39e5437": 20,
+        "2ee8eb13a0124a108e622ce40c0c25a8": 7,
+        "337432f6b6df4aa98c51149f6eadbf33": 1,
+        "9edab6595f3a43389e9f016b5dfc722d": 1,
+        "1efb3a885b5b4aecb6d41221a8f4d86b": 2,
+        "60a676d313ae48718a81c380b73dfe4f": 2,
+        "67755c3091a74bf48d3423fa025464f2": 1,
+        "1337670005c6484c999f9b4c272ee9fe": 1,
+        "92e9c37bc2d3430e92988cf3e547a404": 1,
+        "d4268d7c5dc441fc89e1db1f45fbbca5": 1,
+        "33c7d4e297c64965a610daedd621c84f": 2,
+        "1f261cf72cb1479ca32177c31156ede3": 1,
+        "e812e7e6684d48c69eb4743bec88d927": 1,
+        "daacbe2eec304950b61eef2efe596556": 4,
+        "fb183365050043c2b0d857b811a37cfe": 2,
+        "398691f1f785460098bbe5ee6590333c": 22,
+        "b3b82869fa924bae820e3a6cfb44d689": 1,
+        "af5c9349f0054dd092f5581956764f3a": 1,
+        "942a173110b34fbdb2bc970354bd2931": 1,
+        "3d8055dddd384c4f94f6953937abf0da": 1,
+        "5b39dae19426448e9fc3c48eceed3277": 1,
+        "d7fca7b6d3074f74a4b43eaaab30740b": 1,
+        "756c5a2c3cba4c8ab3819cf2333555bb": 1
+      },
+      "BOM": [],
+      "updateTime": 1674933639,
+      "createTime": 1674933126,
+      "histories": [],
+      "created_at": "2023-01-28 21:12:06",
+      "updated_at": "2023-01-28 21:20:39"
+    }
+  ],
+  "sort": [],
+  "title": "pic24",
+  "foldername": "pic24",
+  "schfilename": "pic24.json",
+  "schfilemtime": 1674933681613
+}
