@@ -1,10 +1,10 @@
 ---
-title: "----------TITLE-------------"
+title: "Εργασία Εξαμήνου"
 subtitle: |
     | Πανεπιστήμιο Δυτικής Αττικής
     | Τμήμα Μηχανικών Πληροφορικής και Υπολογιστών
     | \includegraphics{./img/logo.jpg}
-    | -----------ACTUAL SUBTITLE-------------
+    | Εργαστήριο Ενσωματομένων Συστημάτων
 author: Ευάγγελος Κατσανδρής (cs171014@uniwa.gr)
 date: "`r Sys.setlocale('LC_TIME', 'el_GR.utf8'); format(Sys.time(), '%d %B, %Y')`"
 output: 
@@ -125,6 +125,472 @@ header-includes:
 <!-- \lstlistoflistings -->
 
 \newpage
+
+# Εισαγωγή
+
+
+```text
+   _                   _
+  | |                 | |
+  | |                 | |
+ _| |_   ______   ____| |  ______
+|_   _| |  __  | |  __  | |  __  |
+  | |   | |  | | | |  | | | |  | |
+  | |   | |__| | | |__| | | |__| |
+  |_|   |______| |______| |______|
+
+- transistor for speaker!
+```
+
+Σε αυτή την εργασία ζητήθηκε να σχεδιαστεί ένα ενσωματωμένο σύστημα χρησιμοποιόντας
+έναν μικροελεγκτή, μια οθόνη και έναν αισθητήρα θερμοκρασίας.
+Η υλοποίηση έγινε χρησιμοποιώντας τον μικροελεγκτή [@PIC24 PIC24FJ1024GB610],
+τον αναλογικό αισθητήρα θερμοκρασίας [@TC TC1047A],
+την οθόνη υγρών κρυστάλλων [@LCD TSB1G7000] με τον driver [@LCD_DRIVER NT7603],
+δύο LED, και τρία κουμπιά, περισσότερες πληροφορίες στην \autonameref{@BOM}.
+
+Ζητήθηκαν οι παρακάτω δυνατότητες:
+
+1. Εμφάνιση AM και θερμοκρασίας στην πρώτη γραμμή της οθόνης
+
+2. Λειτουργία ξυπνητηριού, με επιλογή του χρόνου μέσω 2 κουμπιών και επιβεβαίωση με ένα τρίτο.
+
+3. Ειδοποίηση με ενεργοποίηση LED και ήχου στο τέλος του χρόνου.
+
+4. LED λειτουργίας, που αναβοσβήνει όσο το σύστημα λειτουργεί.
+
+# Υλοποίηση
+
+Η υλοποίηση ακολουθάει τις προδιαγραφές λειτουργίας, αποκλίνοντας από αυτές εσκεμμένα.
+Συγκεκριμένα η λειτουργία υπενθύμισης μετά από 10 δευτερόλεπτα άλλαξε σε λειτουργία αναβολής 
+του χρονοδιακόπτη για 10 δευτερόλεπτα, γιατί αυτό ήταν πιο ενδιαφέρον προγραμματιστικά.
+
+Ο κώδικας βασίστηκε στον κώδικα που δόθηκε στο εργαστήριο [@GIT] ο οποίος
+επεκτάθηκε και σχολιάστηκε όπου απαραίτητο. Σε αυτή την ενότητα θα αναλυθούν κομμάτια του
+κώδικα ώστε να αναδειχτεί ο τρόπος λειτουργίας του λογισμικού του συστήματος. Δηλαδή κάποια
+κομμάτια δεν θα συμπεριληφθούν, όπως σχόλια κώδικα και περίπλοκες μακροεντολές του προεπεξεργαστή της C.
+
+## Main
+
+Αφού κάνουμε include της βιβλιοθήκες συστήματος, δηλώνουμε
+```c
+#define SYSTEM_PERIPHERAL_CLOCK 4000000
+```
+το οποίο χρησιμοποιείται στα header της οθόνης και των timer.
+
+Ύστερα κάνουμε include τα headers που έχουμε φτιάξει.
+Το header `uart2.h` χρησιμοποιόταν μόνο κατά την αποσφαλμάτωση με τον εξομοιωτή.
+
+```c
+#include "src/led.h"
+#include "src/button.h"
+#include "src/timer.h"
+#include "src/adc.h"
+#include "src/lcd.h"
+#include "src/uart2.h"
+#include "src/pins.h"
+```
+
+Στη συνέχεια ορίζουμε κάποιες σταθερές που θα χρησιμοποιήσουμε για να αποφύγουμε τους
+"μαγικούς" αριθμούς^[From Wikipedia, the free encyclopedia: A unique value with unexplained meaning or multiple occurrences which could (preferably) be replaced with a named constant]
+Ορίζουμε 600 δευτερόλεπτα ως τον μέγιστο αριθμό δευτερολέπτων που μπορεί να επιλέξει ο χρήστης, διότι $600\mathrm{sec} = 10\mathrm{min}$.
+Μετά ορίζουμε σε `msec` την περίοδο που θα χρησιμοποιήσουμε για τον έλεγχο των κουμπιών, την ενημέρωση της οθόνης και το χρονόμετρο αντίστοιχα.
+Τέλος ορίζουμε στα 500Hz τον τόνο του ηχείου (όχι buzzer).
+
+```c
+#define MAX_SECONDS 600 /* 600 seconds = 10 minutes */
+
+#define BUTTON_EVENT_TIME    10 /* ms */
+#define LCD_UPDATE_TIME     500 /* ms */
+#define ONE_SECOND         1000 /* ms */
+
+#define BUZZER_FREQUENCY    500 /* Hz */
+```
+
+Εδώ ορίζουμε τις καθολικές μεταβλητές.
+
+1. Τα δευτερόλεπτα που απομένουν στο χρονοδιακόπτη.
+
+2. Τα δευτερόλεπτα που έχει επιλέξει ο χρήστης.
+
+3. Το πόσες φορές ο χρήστης έχει σιγάσει τον χρονοδιακόπτη.
+
+4. Η κατάσταση στην οποία βρίσκεται το σύστημα.
+
+```c
+static uint16_t SECONDS_REMAINING = 0; /* seconds user has currently selected */
+static uint16_t SECONDS_SELECTED =  0; /* seconds timer is at, when counting down */
+static uint16_t SNOOZE_COUNT =      0; /* how many times the user has snoozed the alarm */
+
+/*
+ * State of the alarm,
+ * SELECT_TIME:   the user is selecting the time for the alarm
+ * COUNTING_DOWN: the timer is counting down
+ * SNOOZED:       the timer is counting down after the alarm has gone off and the user snoozed it
+ * ALARM:         the timer counted down and is now going off (buzzer sounds and led blinks)
+ */
+static enum State {
+    SELECT_TIME,
+    COUNTING_DOWN,
+    SNOOZED,
+    ALARM,
+} STATE = SELECT_TIME;
+```
+
+## Timer
+
+\label{sec:timer}
+Ο κώδικας για τον timer βρίσκεται στα αρχεία `src/timer.{c,h}`.
+Στην `main()` τον χρησιμοποιούμε για να ορίσουμε συναρτήσεις που θα τρέχουν
+ανά τακτικά χρονικά διαστήματα.
+
+```c
+TIMER_SetConfiguration(TIMER_CONFIGURATION_1MS);
+TIMER_RequestTick(&update_state, ONE_SECOND);
+TIMER_RequestTick(&check_buttons, BUTTON_EVENT_TIME);
+TIMER_RequestTick(&update_lcd, LCD_UPDATE_TIME);
+```
+
+Στο header του έχουμε επίσης ορίσει
+
+```c
+#define SYSTEM_PERIPHERAL_CLOCK 8000000
+```
+
+Γιατί το σύστημά μας τρέχει με ταλαντωτή 8MHz.
+Πέρα από αυτό ο κώδικας δεν έχει αλλάξει πολύ σε σχέση με αυτόν του
+εργαστηρίου πέρα από μερικά σχόλια και `#define`s ώστε ο κώδικας να είναι πιο ευανάγνωστος.
+
+Έτσι, ορίζουμε την περίοδο ως εξής, γιατί $Τ  = \frac{1}{\frac{\mathrm{SYSTEM_PERIPHERAL_CLOCK}}{\frac{1000}{4}}} = \frac{1}{0.001\mathrm{sec}} = 1\mathrm{ms}$
+ώστε να έχουμε 1ms περίοδο.
+
+```c
+#define TMR3_PERIOD_SETTING (SYSTEM_PERIPHERAL_CLOCK/TIMER_TICK_INTERVAL_MICRO_SECONDS/4)
+```
+
+
+## Pins
+
+Στο header `src/pins.h` ορίζουμε με `#define`s περιγραφικά ονόματα για τις "καθολικές μεταβλητές"-καταχωριτές
+που θα χρησιμοποιήσουμε για τα κουμπιά, LED κ.α. περιφεριακά.
+
+## Analogue Digital Converter
+
+Αντίστοιχα με τον κώδικα του timer δεν έχουν γίνει πολλές αλλαγές, με εξαίρεση ίσως την
+χρήση του ADC σε λειτουργία 12bit. Ο ADC διαμορφώθηκε ως εξής χρησιμοποιώντας της πληροφορίες από
+το datasheet του [@ADC]. (Θα δούμε απλά τις τιμές, η ανάθεση γίνεται στη συνάρτηση `ADC_SetConfiguration()`)
+
+
+Χρησιμοποιούμε την εσωτερική πηγή τάσης αναφοράς
+
+```c
+#define ADC_POSITIVE_VREF_SOURCE                      AD1CON2bits.PVCFG
+#define ADC_POSITIVE_VREF_SOURCE_AVDD                 0b00
+```
+
+Ενεργοποιούμε την αυτόματη μετατροπή, κάθε $\mathrm{T_{AD}}=0xFF\mathrm{(hex)} = 256\mathrm{(dec)}$ κύκλους του ADC.
+
+```c
+#define ADC_CONV_CLOCK                                AD1CON3bits.ADCS 
+#define ADC_CONV_CLOCK_VALUE                          0xFF
+```
+
+Απενεργοποιούμε την αυτόματη επαναφορά του SAMP^[SAMP: Sample Enable bit] από το υλικό, γιατί θα το κάνουμε εμείς από το λογισμικό.
+
+```c
+#define ADC_SAMPLE_CLOCK_SOURCE_BITS                  AD1CON1bits.SSRC
+#define ADC_SAMPLE_CLOCK_SOURCE_MANUAL_SOFTWARE_CLEAR 0x0
+```
+
+Ορίζουμε τον χρόνο δειγματοληψίας σε $0b10000\mathrm{(bin)} Τ_{AD}=16\mathrm{(dec)} T_{AD}$.
+
+```c
+#define ADC_AUTO_SAMPLE                               AD1CON3bits.SAMC
+#define ADC_AUTO_SAMPLE_16_ADC_CYCLES                 0b10000
+```
+
+Ορίζουμε το φορματ του αποτελέσματος.
+
+```c
+#define ADC_FORMAT                                    AD1CON1bits.FORM
+#define ADC_FORMAT_ABSOLUTE_DECIMAL_UNSIGNED_RIGHT    0b00
+```
+
+Ενεργοποιούμε το interupt αμέσως μετά την μετατροπή κάθε δείγματος.
+(Δεν είναι σίγουρο ότι χρησιμοποιούμε αυτό το interupt, ίσως να έπρεπε να το απενεργοποιήσουμε,
+δεν έγινε δοκιμή στο Explorer 16).
+
+```c
+#define ADC_INTERUPT_SAMPLE                           AD1CON2bits.SMPI
+#define ADC_INTERUPT_SAMPLE_FOR_EVERY_SAMPLE          0x0
+```
+
+Ενεργοποιούμε το ADC (αναρωτιόμαστε γιατί;).
+
+```c
+#define ADC_ON                                        AD1CON1bits.ADON
+```
+
+Ορίζουμε λειτουργία σε 12bit.
+
+```c
+#define ADC_OPERATION_MODE                            AD1CON1bits.MODE12
+#define ADC_OPERATION_MODE_12BIT                      0b1
+```
+
+Με αυτές τις ρυθμίσεις και σύμφωνα με το datasheet του μικροελεκτή μας [@PIC24 σελίδα 366, σχήμα 25-4], η συνάρτηση
+μετατροπής τιμής-τάσης του ADC όταν βρίσκεται σε λειτουργία 12bit είναι:
+
+\begin{gather}
+V_{out}\mathrm{(mV)} = V_{ref-} + \frac{\mathbfit{\alpha} \cdot (V_{ref+} - V_{ref-}) }{2^{\mathrm{mode}}} \label{eq:ADC} \\
+V_{ref+} = 3.3\mathrm{V} = 3300\mathrm{mV} \label{eq:vrefp} \\
+V_{ref-} = 0\mathrm{V} = 0\mathrm{mV} \label{eq:vrefn} \\
+\mathrm{mode} = 12\mathrm{bit} \label{eq:mode}
+\end{gather}
+
+
+Όπου $\mathbfit{\alpha}$ είναι η τιμή που επιστρέφει ο ADC.
+
+Άρα από \ref{eq:ADC} \ref{eq:vrefp}, \ref{eq:vrefn} και \ref{eq:mode}.
+
+
+\begin{equation}
+V_{out}\mathrm{(mV)} = \frac{\mathrm{adc} \cdot 3300\mathrm{mV} }{4096} \label{eq:ADC_end}
+\end{equation}
+
+
+## Αισθητήρας θερμοκρασίας
+
+Το μόνο κομμάτι κώδικα που αφορά τον αισθητήρα είναι η συνάρτηση μετατροπής της τιμής
+που παίρνουμε από τον ADC σε mV και μετά Celcius.
+
+Σύμφωνα με το datasheet του αισθητήρα [@TC, σελίδα 4, σχήμα 4-1], η συνάρτηση μετατροπής
+τάσης-θερμοκρασίας είναι:
+
+\begin{gather}
+V_{out}\mathrm{(mV)} = 10\mathrm{(mV)} \cdot T\mathrm{(Celcius)} + 500\mathrm{mV} \\
+T\mathrm{(Celcius)} = \frac{V_{out}\mathrm{(mV)} - 500\mathrm{mV}}{10} \label{eq:temp}
+\end{gather}
+
+Έτσι τελικά από την συνάρτηση μετατροπής τιμής-τάσης του adc \ref{eq:ADC_end} και \ref{eq:temp}
+που μόλις υπολογίσαμε έχουμε:
+
+\begin{equation*}
+V_{out}\mathrm{(mV)} = \frac{\frac{\mathbfit{\alpha} \cdot 3300\mathrm{mV}}{4096}  - 500\mathrm{mV}}{10}
+\end{equation*}
+
+Τώρα μπορούμε να γράψουμε μια συνάρτηση που παίρνει μια τιμή από τον ADC
+με την συνάρτηση `ADC_Read12Bit(ADC_CHANNEL_TEMPERATURE_SENSOR)` και την
+μετατρέπει σε βαθμούς Κελσίου. Προφανώς θα μπορούσαμε να απλοποιήσουμε (μαθηματικά)
+την συνάρτηση λίγο ακόμα, άλλα η χρήση των σταθερών την κάνει πιο ευανάγνωστη.
+```c
+static float adc_to_celcius(int value) {
+    const float Vrefp = 3300.0f; // mV
+    const float Vrefn = 0.0f;    // mV
+    const float adc_stages = 4096.f; // for 12bit mode of adc
+    float mV = (value * Vrefp - Vrefn) / adc_stages; // convert adc output to millivolts
+    return (mV - 500) / 10;                          // convert millivolts to Celcius
+}
+```
+
+## Buttons
+
+Ελέγχουμε εάν ένα από τα κουμπιά είναι πατημένα στην συνάρτηση `check_buttons()`
+που είδαμε προηγουμένως στην \autonameref{sec:timer} θα καλείτε κάθε 10ms.
+
+```c
+/*
+ * S5 (RA7) increase timer
+ * S4(RD13) decrease timer
+ * S3 (RD6) enter
+ */
+static void check_buttons(void) {
+    if (debounce_button_pressed(BUTTON_S5)) {
+        /* do UP action*/
+        if (SECONDS_SELECTED < MAX_SECONDS)
+            SECONDS_SELECTED += 10;
+    }
+
+    if (debounce_button_pressed(BUTTON_S4)) {
+        /* do DOWN action*/
+        if (SECONDS_SELECTED > 0)
+            SECONDS_SELECTED -= 10;
+    }
+
+    if (debounce_button_pressed(BUTTON_S3)) {
+        /* do ENTER/SNOOZE action*/
+        switch (STATE) {
+            // if we are selecting the time, ENTER starts the countdown
+            case SELECT_TIME: {
+                STATE = COUNTING_DOWN;
+                SECONDS_REMAINING = SNOOZE_TIME;
+                break;
+            }
+            // if we are sounding the alarm, ENTER snoozes the alarm
+            case ALARM: {
+                stop_alarm();
+                SECONDS_REMAINING = SNOOZE_TIME;
+                STATE = SNOOZED;
+            }
+            default:
+                break;
+        }
+    }
+}
+```
+
+Ένα απλό κουμπί είναι απλά ένας διακόπτης, δηλαδή όταν ο χρήστης το πατάει, κλείνει ένα κύκλωμα.
+Έτσι το σύστημα δεν μπορεί να καταλάβει αν ο χρήστης ήθελε να πατήσει το κουμπί μια φορά ή παρατεταμένα, αν ο χρήστης
+το πατήσει για ένα ανθρώπινο χρονικό διάστημα π.χ. 100ms.
+Έτσι να γίνει πιο εύκολη η χρήση των κουμπιών  πρέπει όταν ο χρήστης πατάει ένα κουμπί
+το σύστημα να θυμάται για λίγο χρόνο ότι το κουμπί μόλις πατήθηκε.
+
+Για να το πετύχουμε αυτό, αρχικά ορίζουμε έναν πίνακα με 5 θέσεις
+(όσα τα κουμπιά του Explorer16) ο οποίος θα κρατάει τον αριθμό των κύκλων από την τελευταία
+φορά που το κουμπί πατήθηκε και το σύστημα το αναγνώρισε.
+
+```c
+static uint16_t BUTTON_DEBOUNCE[5] = {0};
+```
+
+Μετά ορίζουμε μια μεταβλητή που θα κρατάει τον αριθμό των κύκλων που το σύστημα πρέπει
+να περιμένει για να αναγνωρίσει ένα πάτημα του κουμπιού μετά από ένα προηγούμενο πάτημα.
+```c
+static uint16_t DEBOUNCE_TIME = 0; /* no init */
+```
+
+Η μεταβλητή αυτή παίρνει τιμή στην συνάρτηση `init_button()`, η οποία επίσης
+ενεργοποιεί τα κουμπιά.
+
+```c
+void init_button(uint16_t timer_ms) {
+    BUTTON_Enable(BUTTON_S3);
+    BUTTON_Enable(BUTTON_S4);
+    BUTTON_Enable(BUTTON_S5);
+
+    DEBOUNCE_TIME = timer_ms;
+}
+```
+
+Στην `main()` βλέπουμε ότι την θα πάρει τιμή 100.
+
+```c
+    int main(void) {
+    /* [...] */
+    init_button(100);
+    /* [...] */
+    }
+```
+
+Στη συνέχεια ορίζουμε την συνάρτηση `debounce_button_pressed()` η οποία χρησιμοποιεί
+τις μεταβλητές που μόλις είδαμε.
+
+Δουλεύει ως εξής:
+
+1. Αν το κουμπί είναι πατημένο και έχουν περάσει 100 κύκλοι,
+   θέτουμε τους κύκλους που θα πρέπει να περιμένει το σύστημα
+   για να ξαναναγνωρίσει ένα πάτημα και επιστρέφουμε ότι αναγνωρίζουμε το πάτημα.
+
+2. Διαφορετικά επιστρέφουμε ότι δεν το κουμπί δεν είναι πατημένο και
+   αν το κουμπί είχε πατηθεί προηγουμένης, μειώνουμε τον μετρητή κύκλων
+   του κουμπιού κατά 1.
+
+```c
+bool debounce_button_pressed(BUTTON btn) {
+    if (BUTTON_IsPressed(btn) && BUTTON_DEBOUNCE[btn] == 0) {
+        BUTTON_DEBOUNCE[btn] = DEBOUNCE_TIME;
+        return true;
+    } 
+
+    /* always subtract from debounce, but don't go below 0 */
+    if (BUTTON_DEBOUNCE[btn] > 0) {
+        BUTTON_DEBOUNCE[btn] -= 1;   
+    }
+    
+    return false;
+}
+```
+
+Όπως είδαμε πριν η συνάρτηση `debounce_button_pressed()` καλείτε από την `check_buttons()`
+η οποία καλείτε κάθε 10ms, άρα για 100 κύκλους το σύστημα περιμένει 1sec (ένα δευτερόλεπτο) για να αναγνωρίσει διαδοχικά
+πατήματα ενός κουμπιού.
+
+## LCD
+
+Ο κώδικας για την αλληλεπίδραση με την οθόνη δεν έχει αλλάξει σε σχέση με αυτόν που
+δόθηκε στο εργαστήριο. Η χρήση της γίνεται στην συνάρτηση `update_lcd()`, όπου:
+
+1. Διαβάζουμε και μετατρέπουμε την τιμή που παίρνουμε από τον ADC για να πάρουμε την θερμοκρασία
+   και την εμφανίζουμε μαζί με το ΑΜ.
+
+2. Χρησιμοποιούμε μια σταθερά που βρήκαμε στο datasheet του driver της LCD [@LCD_DRIVER σελίδα 13, πίνακας 1]
+   για το σύμβολο `°`(degree).
+
+3. Ανάλογα με την κατάσταση του συστήματος:
+
+    - Επιλογή διάρκειας: Εμφανίζουμε τον χρόνο που επιλέγει ο χρήστης
+    
+    - Αναβολή χρονοδιακόπτη: Εμφανίζουμε το πόσες φορές ο χρήστης έχει αναβάλει το alarm, όπως και τον χρόνο που απομένει.
+
+    - Διαφορετικά εμφανίζουμε τον χρόνο που απομένει.
+```c
+// degree character hex value
+#define CHAR_DEGREE 0xDF
+
+static void update_lcd(void) {
+    // read from ADC
+    uint16_t value = ADC_Read12bit(ADC_CHANNEL_TEMPERATURE_SENSOR);
+    // convert adc value to temperature
+    float temp = adc_to_celcius(value);
+
+    printf("\f"); // clear screen
+    printf("171014, %5.2f%cC\n\r", (double)temp, CHAR_DEGREE); // print AM, temperature and degree symbol, cast to double to silence warning
+    printf("%s", STATE_STRING[STATE]);                 // print state
+    switch(STATE) {
+        case SELECT_TIME: {
+            printf(": %ds", SECONDS_SELECTED);          // print selected time
+            break;
+        }
+        case SNOOZED: {
+            printf(" %d/%d: %ds", SNOOZE_COUNT + 1, MAX_SNOOZE, SECONDS_REMAINING); // print snooze count and remaining time
+            break;
+        }
+        default: {
+            printf(": %ds", SECONDS_REMAINING);         // print remaining time
+            break;
+        }
+    }
+    
+}
+```
+
+# Σχηματικό Διάγραμμα και PCB
+
+Η σχεδίαση του schematic και του PCB έγινε στο easyEDA. Δεν έχω ξανασχεδιάσει PCB
+οπότε πιθανός να έχει πολλά χαζά λάθη.
+
+Το footprint κάποιων εξαρτημάτων όπως η LCD και το speaker έχουν σωστό μόνο τον αριθμό pin και το μέγεθος
+η θέση των pin κ.α. δεν είναι σωστές γιατί έπρεπε να τα σχεδιάσω εγώ.
+
+Τα σχέδια είναι βασισμένα κατά κύριο λόγο στα schematics του Explorer16.
+Το μόνο "κομμάτι" που σχεδίασα από το μηδέν είναι το speaker με τον τρανζίστορ του.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{"./Schematic_pic24_2023-01-28.pdf"}
+    \caption{Σχηματικό}
+    \label{fig:schematic}
+\end{figure}
+
+
+# Λίστα Υλικών
+\label{sec:BOM}
+
+# Εκτίμηση Κόστους
+
+# Εκτίμηση περιοχής θερμοκρασίας
+
+# Διάρκεια ζωής
 
 <!-- \nocite{R} -->
 \nocite{Rmd}

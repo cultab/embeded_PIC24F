@@ -16,7 +16,7 @@ void init_button(uint16_t timer_ms) {
     BUTTON_Enable(BUTTON_S4);
     BUTTON_Enable(BUTTON_S5);
 
-    DEBOUNCE_TIME = timer_ms * 1;
+    DEBOUNCE_TIME = timer_ms;
 }
     
 /*

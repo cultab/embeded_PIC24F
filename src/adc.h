@@ -16,7 +16,7 @@
 #define ADC_POSITIVE_VREF_SOURCE_EXTERNAL             0b01
 #define ADC_POSITIVE_VREF_SOURCE_AVDD                 0b00
 
-// why 0xFF? 0100 0000 and up are reserved???
+// time = 256 * T_{AD}
 #define ADC_CONV_CLOCK                                AD1CON3bits.ADCS 
 #define ADC_CONV_CLOCK_VALUE                          0xFF
 

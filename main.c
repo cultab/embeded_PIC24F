@@ -26,7 +26,6 @@
 // define system clock at 4MHz (for LCD and TMR{1-3})
 #define SYSTEM_PERIPHERAL_CLOCK 4000000
 
-
 #include "src/led.h"
 #include "src/button.h"
 #include "src/timer.h"
@@ -43,8 +42,8 @@
 #define ONE_SECOND         1000 /* ms */
 
 #define BUZZER_FREQUENCY    500 /* Hz */
-#if ( BUZZER_FREQUENCY > 1000 ) /* at most 1000Hz aka 1ms period */
-#define BUZZER_FREQUENCY 1000
+#if   ( BUZZER_FREQUENCY > 1000 ) /* at most 1000Hz aka 1ms period */
+#define   BUZZER_FREQUENCY 1000
 #endif
 
 #define forever for(; ;) /* fun */
@@ -98,7 +97,7 @@ int main(void) {
     // initialize the device
 //     initU2(); /* for debugging */
     LCD_Initialize();
-    init_button(BUTTON_EVENT_TIME * 10); // debounce of 10 cycles
+    init_button(100); // debounce of 100 cycles
 
     // init ADC
     ADC_SetConfiguration(ADC_CONFIGURATION_DEFAULT);
