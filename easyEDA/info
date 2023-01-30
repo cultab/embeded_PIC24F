@@ -4,7 +4,7 @@
   "name": "pic24",
   "content": "",
   "created_at": "2023-01-27 22:29:58",
-  "updated_at": "2023-01-28 21:21:21",
+  "updated_at": "2023-01-29 23:25:31",
   "stick": "",
   "documents": [
     {
@@ -37,7 +37,8 @@
         "e33cc1be9d5e4d929dda60b4eb023d72": 2,
         "bdc610dff263454da181754abcd2ce9e": 1,
         "a2b2ccf9923342ac94fad38511e97f48": 1,
-        "255fd33dd435463e98673b3e52dbb2b1": 2
+        "255fd33dd435463e98673b3e52dbb2b1": 2,
+        "4e5e5775fd634dd48141eafc77c26e7a": 1
       },
       "BOM": [
         [
@@ -48,14 +49,15 @@
           "CustomPara"
         ],
         [
-          "0.1u",
+          "0.1uF",
           2,
           "C0603",
           "C1,C2",
           {
-            "BOM_Supplier Part": "",
-            "BOM_Supplier": "",
-            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "C2976899",
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer Part": "CA45A-A-35V-0.1UF-K",
+            "BOM_Manufacturer": "CEC(振华新云)",
             "puuid": "f8151fdc728a41ebbc304e11d39e5437",
             "uuid": "24eeb2ceca08480b92b847b6a310acda"
           }
@@ -66,9 +68,10 @@
           "C0603",
           "C3",
           {
-            "BOM_Supplier Part": "",
-            "BOM_Supplier": "",
-            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "C281815",
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer Part": "CL21-0.022uF250V 5%",
+            "BOM_Manufacturer": "Tongfeng(铜峰电子)",
             "puuid": "f8151fdc728a41ebbc304e11d39e5437",
             "uuid": "24eeb2ceca08480b92b847b6a310acda"
           }
@@ -79,9 +82,10 @@
           "C0603",
           "C4,C23",
           {
-            "BOM_Supplier Part": "",
-            "BOM_Supplier": "",
-            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "C1846",
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer Part": "1206B103K500NT",
+            "BOM_Manufacturer": "FH(风华)",
             "puuid": "f8151fdc728a41ebbc304e11d39e5437",
             "uuid": "24eeb2ceca08480b92b847b6a310acda"
           }
@@ -92,9 +96,10 @@
           "C0805",
           "C5,C12,C13,C14,C17,C18",
           {
-            "BOM_Supplier Part": "",
-            "BOM_Supplier": "",
-            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "C13585",
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer Part": "CL31A106KBHNNNE",
+            "BOM_Manufacturer": "SAMSUNG(三星)",
             "puuid": "2ee8eb13a0124a108e622ce40c0c25a8",
             "uuid": "b82150387a2041b4afd55b90c79c5923"
           }
@@ -105,10 +110,10 @@
           "C0603",
           "C6,C7,C8,C9,C11",
           {
-            "BOM_Supplier Part": "",
-            "BOM_Supplier": "",
-            "BOM_Manufacturer Part": "",
-            "BOM_Manufacturer": "",
+            "BOM_Supplier Part": "C13585",
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer Part": "CL31A106KBHNNNE",
+            "BOM_Manufacturer": "SAMSUNG(三星)",
             "puuid": "f8151fdc728a41ebbc304e11d39e5437",
             "uuid": "24eeb2ceca08480b92b847b6a310acda"
           }
@@ -119,9 +124,10 @@
           "C0805",
           "C10",
           {
-            "BOM_Supplier Part": "",
-            "BOM_Supplier": "",
-            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "C3019036",
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer Part": "PE103J2A0504",
+            "BOM_Manufacturer": "KYET(科雅)",
             "puuid": "2ee8eb13a0124a108e622ce40c0c25a8",
             "uuid": "b82150387a2041b4afd55b90c79c5923"
           }
@@ -132,9 +138,10 @@
           "C0603",
           "C15,C22",
           {
-            "BOM_Supplier Part": "",
-            "BOM_Supplier": "",
-            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "C1848",
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer Part": "CL31B105KBHNNNE",
+            "BOM_Manufacturer": "SAMSUNG(三星)",
             "puuid": "f8151fdc728a41ebbc304e11d39e5437",
             "uuid": "24eeb2ceca08480b92b847b6a310acda"
           }
@@ -145,9 +152,10 @@
           "C0603",
           "C16,C19,C20,C21",
           {
-            "BOM_Supplier Part": "",
-            "BOM_Supplier": "",
-            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "C138340",
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer Part": "CT41G-0805-2X1-50V-0.1μF-M(N)",
+            "BOM_Manufacturer": "TORCH(火炬)",
             "puuid": "f8151fdc728a41ebbc304e11d39e5437",
             "uuid": "24eeb2ceca08480b92b847b6a310acda"
           }
@@ -158,9 +166,10 @@
           "C0603",
           "C24,C25",
           {
-            "BOM_Supplier Part": "",
-            "BOM_Supplier": "",
-            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "C183678",
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer Part": "C0201C0G270G500NTA",
+            "BOM_Manufacturer": "EYANG(宇阳科技)",
             "puuid": "f8151fdc728a41ebbc304e11d39e5437",
             "uuid": "24eeb2ceca08480b92b847b6a310acda"
           }
@@ -171,9 +180,10 @@
           "C0603",
           "C26,C27",
           {
-            "BOM_Supplier Part": "",
-            "BOM_Supplier": "",
-            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "C237567",
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer Part": "GRM0335C1H150FA01D",
+            "BOM_Manufacturer": "muRata(村田)",
             "puuid": "f8151fdc728a41ebbc304e11d39e5437",
             "uuid": "24eeb2ceca08480b92b847b6a310acda"
           }
@@ -184,7 +194,10 @@
           "SMA-DIODE",
           "D1",
           {
-            "BOM_Manufacturer Part": "",
+            "BOM_Manufacturer Part": "B340A",
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer": "MDD",
+            "BOM_Supplier Part": "C64982",
             "puuid": "337432f6b6df4aa98c51149f6eadbf33",
             "uuid": "7e6edb7b3f25455d97b9544648316b30"
           }
@@ -237,7 +250,10 @@
           "DIODE",
           "D6",
           {
-            "BOM_Manufacturer Part": "",
+            "BOM_Manufacturer Part": "SZMM3Z5V1ST1G",
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer": "onsemi(安森美)",
+            "BOM_Supplier Part": "C152524",
             "puuid": "67755c3091a74bf48d3423fa025464f2",
             "uuid": "bdc610dff263454da181754abcd2ce9e"
           }
@@ -275,7 +291,10 @@
           "SOIC127P600X175-8N",
           "IC1",
           {
-            "BOM_Manufacturer Part": "",
+            "BOM_Manufacturer Part": "MCP1727T-3002E/SN",
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer": "MICROCHIP(美国微芯)",
+            "BOM_Supplier Part": "C623108",
             "puuid": "d4268d7c5dc441fc89e1db1f45fbbca5",
             "uuid": "cf153b6631ff4f7daf1880029316df26"
           }
@@ -286,10 +305,10 @@
           "JUMPER WIRE",
           "J1,J3",
           {
-            "BOM_Supplier": "",
-            "BOM_Supplier Part": "NONE",
-            "BOM_Manufacturer": "NONE",
-            "BOM_Manufacturer Part": "NONE",
+            "BOM_Supplier": "LCSC",
+            "BOM_Supplier Part": "C2940092",
+            "BOM_Manufacturer": "null",
+            "BOM_Manufacturer Part": "Jumper2",
             "puuid": "33c7d4e297c64965a610daedd621c84f",
             "uuid": "a09d6c9760d6498a9931e69718377cf8"
           }
@@ -300,9 +319,10 @@
           "L0603",
           "L1",
           {
-            "BOM_Supplier Part": "",
-            "BOM_Supplier": "",
-            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "C3002683",
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer Part": "CKST1004-4.7uH/M",
+            "BOM_Manufacturer": "CENKER(岑科)",
             "puuid": "1f261cf72cb1479ca32177c31156ede3",
             "uuid": "a4eacdcb63554cb08b3b56477817ab57"
           }
@@ -340,7 +360,10 @@
           "R1206",
           "Q1",
           {
-            "BOM_Manufacturer Part": "",
+            "BOM_Manufacturer Part": "7X-8.000MBE-T",
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer": "TXC(晶技)",
+            "BOM_Supplier Part": "C2451906",
             "puuid": "fb183365050043c2b0d857b811a37cfe",
             "uuid": "255fd33dd435463e98673b3e52dbb2b1"
           }
@@ -351,9 +374,27 @@
           "R1206",
           "Q2",
           {
-            "BOM_Manufacturer Part": "",
+            "BOM_Manufacturer Part": "ASAK-32.768KHZ-LRS-T",
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer": "ABRACON",
+            "BOM_Supplier Part": "C2650746",
             "puuid": "fb183365050043c2b0d857b811a37cfe",
             "uuid": "255fd33dd435463e98673b3e52dbb2b1"
+          }
+        ],
+        [
+          "2N3904(SOT-23)",
+          1,
+          "SOT-23-3_L2.9-W1.3-P1.90-LS2.4-TR",
+          "Q3",
+          {
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer": "KEC",
+            "BOM_Manufacturer Part": "2n3904S-RTK/PS",
+            "BOM_Supplier Part": "C18536",
+            "BOM_Paste Type": "SOT-23",
+            "puuid": "4a81c52f384a4e1ba3f57a3703e0f5f9",
+            "uuid": "4e5e5775fd634dd48141eafc77c26e7a"
           }
         ],
         [
@@ -362,9 +403,10 @@
           "R0603",
           "R1",
           {
-            "BOM_Supplier Part": "",
-            "BOM_Supplier": "",
-            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "C170194",
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer Part": "WR02X1001FAL",
+            "BOM_Manufacturer": "Walsin(华新科)",
             "puuid": "398691f1f785460098bbe5ee6590333c",
             "uuid": "b0248eb51e084227889f2cb84eab79c4"
           }
@@ -375,9 +417,10 @@
           "R0603",
           "R2,R10,R11,R13,R17,R20,R22",
           {
-            "BOM_Supplier Part": "",
-            "BOM_Supplier": "",
-            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "C307021",
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer Part": "RK73B1HTTC202J",
+            "BOM_Manufacturer": "KOA",
             "puuid": "398691f1f785460098bbe5ee6590333c",
             "uuid": "b0248eb51e084227889f2cb84eab79c4"
           }
@@ -388,9 +431,10 @@
           "R0603",
           "R3,R6,R7",
           {
-            "BOM_Supplier Part": "",
-            "BOM_Supplier": "",
-            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "C144008",
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer Part": "AF0201JR-0720KL",
+            "BOM_Manufacturer": "YAGEO(国巨)",
             "puuid": "398691f1f785460098bbe5ee6590333c",
             "uuid": "b0248eb51e084227889f2cb84eab79c4"
           }
@@ -401,9 +445,10 @@
           "R0603",
           "R4,R5,R8",
           {
-            "BOM_Supplier Part": "",
-            "BOM_Supplier": "",
-            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "C88959",
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer Part": "BLM03HD471SN1D",
+            "BOM_Manufacturer": "muRata(村田)",
             "puuid": "398691f1f785460098bbe5ee6590333c",
             "uuid": "b0248eb51e084227889f2cb84eab79c4"
           }
@@ -414,9 +459,10 @@
           "R0603",
           "R9,R12,R15,R19,R21",
           {
-            "BOM_Supplier Part": "",
-            "BOM_Supplier": "",
-            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "C295849",
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer Part": "RC0201JR-0736KL",
+            "BOM_Manufacturer": "YAGEO(国巨)",
             "puuid": "398691f1f785460098bbe5ee6590333c",
             "uuid": "b0248eb51e084227889f2cb84eab79c4"
           }
@@ -427,9 +473,10 @@
           "R0603",
           "R14",
           {
-            "BOM_Supplier Part": "",
-            "BOM_Supplier": "",
-            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "C240108",
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer Part": "RM02FTN82R0",
+            "BOM_Manufacturer": "大毅科技",
             "puuid": "398691f1f785460098bbe5ee6590333c",
             "uuid": "b0248eb51e084227889f2cb84eab79c4"
           }
@@ -440,9 +487,10 @@
           "R0603",
           "R16",
           {
-            "BOM_Supplier Part": "",
-            "BOM_Supplier": "",
-            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "C295854",
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer Part": "RC0201JR-0743KL",
+            "BOM_Manufacturer": "YAGEO(国巨)",
             "puuid": "398691f1f785460098bbe5ee6590333c",
             "uuid": "b0248eb51e084227889f2cb84eab79c4"
           }
@@ -453,9 +501,10 @@
           "R0603",
           "R18",
           {
-            "BOM_Supplier Part": "",
-            "BOM_Supplier": "",
-            "BOM_Manufacturer Part": "",
+            "BOM_Supplier Part": "C143985",
+            "BOM_Supplier": "LCSC",
+            "BOM_Manufacturer Part": "AF0201FR-07200KL",
+            "BOM_Manufacturer": "YAGEO(国巨)",
             "puuid": "398691f1f785460098bbe5ee6590333c",
             "uuid": "b0248eb51e084227889f2cb84eab79c4"
           }
@@ -496,10 +545,10 @@
           "SPEAKER_FOOT",
           "U2",
           {
-            "BOM_Manufacturer": "",
-            "BOM_Manufacturer Part": "",
-            "BOM_Supplier Part": "",
-            "BOM_Supplier": "",
+            "BOM_Manufacturer": "null",
+            "BOM_Manufacturer Part": "buzzer",
+            "BOM_Supplier Part": "C9900014030",
+            "BOM_Supplier": "LCSC",
             "puuid": "942a173110b34fbdb2bc970354bd2931",
             "uuid": "caa7002997e549f897556a059b0baca5"
           }
@@ -555,11 +604,11 @@
           }
         ]
       ],
-      "updateTime": 1674933681,
+      "updateTime": 1675027511,
       "createTime": 1674851399,
       "histories": [],
       "created_at": "2023-01-27 22:29:59",
-      "updated_at": "2023-01-28 21:21:21"
+      "updated_at": "2023-01-29 23:25:11"
     },
     {
       "uuid": "37c5a11fb1cdafda829cf30383de52fb",
@@ -645,19 +694,62 @@
         "3d8055dddd384c4f94f6953937abf0da": 1,
         "5b39dae19426448e9fc3c48eceed3277": 1,
         "d7fca7b6d3074f74a4b43eaaab30740b": 1,
-        "756c5a2c3cba4c8ab3819cf2333555bb": 1
+        "756c5a2c3cba4c8ab3819cf2333555bb": 1,
+        "4a81c52f384a4e1ba3f57a3703e0f5f9": 1
       },
       "BOM": [],
-      "updateTime": 1674933639,
+      "updateTime": 1675023687,
       "createTime": 1674933126,
       "histories": [],
       "created_at": "2023-01-28 21:12:06",
-      "updated_at": "2023-01-28 21:20:39"
+      "updated_at": "2023-01-29 22:21:27"
+    },
+    {
+      "uuid": "059bab85e751ff1338d44fc062a3eebc",
+      "puuid": "c47872bff2b19e5aa04f8e7ea378d0e5",
+      "title": "PCB_pic24_4",
+      "filename": "PCB_pic24_4.json",
+      "description": "",
+      "docType": "3",
+      "master": "",
+      "thumb": "/images/thumb-default.png",
+      "components": {
+        "f8151fdc728a41ebbc304e11d39e5437": 20,
+        "2ee8eb13a0124a108e622ce40c0c25a8": 7,
+        "337432f6b6df4aa98c51149f6eadbf33": 1,
+        "9edab6595f3a43389e9f016b5dfc722d": 1,
+        "1efb3a885b5b4aecb6d41221a8f4d86b": 2,
+        "60a676d313ae48718a81c380b73dfe4f": 2,
+        "67755c3091a74bf48d3423fa025464f2": 1,
+        "1337670005c6484c999f9b4c272ee9fe": 1,
+        "92e9c37bc2d3430e92988cf3e547a404": 1,
+        "d4268d7c5dc441fc89e1db1f45fbbca5": 1,
+        "33c7d4e297c64965a610daedd621c84f": 2,
+        "1f261cf72cb1479ca32177c31156ede3": 1,
+        "e812e7e6684d48c69eb4743bec88d927": 1,
+        "daacbe2eec304950b61eef2efe596556": 4,
+        "fb183365050043c2b0d857b811a37cfe": 2,
+        "4a81c52f384a4e1ba3f57a3703e0f5f9": 1,
+        "398691f1f785460098bbe5ee6590333c": 22,
+        "b3b82869fa924bae820e3a6cfb44d689": 1,
+        "af5c9349f0054dd092f5581956764f3a": 1,
+        "942a173110b34fbdb2bc970354bd2931": 1,
+        "3d8055dddd384c4f94f6953937abf0da": 1,
+        "5b39dae19426448e9fc3c48eceed3277": 1,
+        "d7fca7b6d3074f74a4b43eaaab30740b": 1,
+        "756c5a2c3cba4c8ab3819cf2333555bb": 1
+      },
+      "BOM": [],
+      "updateTime": 1675027531,
+      "createTime": 1675024921,
+      "histories": [],
+      "created_at": "2023-01-29 22:42:01",
+      "updated_at": "2023-01-29 23:25:31"
     }
   ],
   "sort": [],
   "title": "pic24",
   "foldername": "pic24",
   "schfilename": "pic24.json",
-  "schfilemtime": 1674933681613
+  "schfilemtime": 1675027511278
 }

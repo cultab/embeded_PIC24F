@@ -117,6 +117,6 @@ render:
 
 submit:
 	cp report.pdf 171014.pdf
-	7z a 171014.zip 171014.pdf
+	7z a 171014.zip 171014.pdf Makefile main.c src easyEDA nbproject BOM_pic24_2023-01-30.csv ./Schematic_pic24_2023-01-29.pdf ./PCB_PCB_pic24_4_2023-01-29.pdf
 
 .PHONY: render submit
